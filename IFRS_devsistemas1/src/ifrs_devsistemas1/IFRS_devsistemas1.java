@@ -5,6 +5,8 @@
  */
 package ifrs_devsistemas1;
 
+import telas.Login;
+
 /**
  *
  * @author Fate
@@ -16,6 +18,9 @@ public class IFRS_devsistemas1 {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        Login menu = new Login();
+        menu.setVisible(true);
+
     }
-    
+
 }

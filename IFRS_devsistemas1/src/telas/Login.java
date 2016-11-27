@@ -5,19 +5,23 @@
  */
 package telas;
 
+import dao.FuncionarioDAO;
+import java.sql.SQLException;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
+import vo.FuncionarioVO;
 
 /**
  *
  * @author Fate
  */
-public class login extends javax.swing.JFrame {
+public class Login extends javax.swing.JFrame {
 
     /**
      * Creates new form login
      */
-    public login() {
+    public Login() {
         initComponents();
     }
 
@@ -30,14 +34,16 @@ public class login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton_login = new javax.swing.JButton();
+        jButton_entrar = new javax.swing.JButton();
         jButton_configurar = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jTextField_login = new javax.swing.JTextField();
+        jLabelTitulo = new javax.swing.JLabel();
+        jText_login = new javax.swing.JTextField();
         jButton_sair = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        jText_senha = new javax.swing.JPasswordField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("BeautySalon - Login");
@@ -46,10 +52,15 @@ public class login extends javax.swing.JFrame {
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setResizable(false);
 
-        jButton_login.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton_login.setText("ENTRAR");
+        jButton_entrar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jButton_entrar.setText("ENTRAR");
+        jButton_entrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_entrarActionPerformed(evt);
+            }
+        });
 
-        jButton_configurar.setFont(new java.awt.Font("Tahoma", 0, 8)); // NOI18N
+        jButton_configurar.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jButton_configurar.setText("Configurar conexão");
         jButton_configurar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -57,13 +68,14 @@ public class login extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Trebuchet MS", 1, 36)); // NOI18N
-        jLabel1.setText("BeautySalon v1.0");
+        jLabelTitulo.setFont(new java.awt.Font("Trebuchet MS", 1, 36)); // NOI18N
+        jLabelTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelTitulo.setText("BeautySalon");
 
-        jTextField_login.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField_login.setToolTipText("Digite seu login");
+        jText_login.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jText_login.setToolTipText("Digite seu cpf");
 
-        jButton_sair.setFont(new java.awt.Font("Tahoma", 0, 8)); // NOI18N
+        jButton_sair.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jButton_sair.setText("Sair");
         jButton_sair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -71,8 +83,12 @@ public class login extends javax.swing.JFrame {
             }
         });
 
-        jPasswordField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jPasswordField1.setToolTipText("Digite sua senha");
+        jText_senha.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jText_senha.setToolTipText("Digite sua senha");
+
+        jLabel1.setText("CPF:");
+
+        jLabel2.setText("SENHA:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -82,18 +98,24 @@ public class login extends javax.swing.JFrame {
                 .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
+                        .addComponent(jLabelTitulo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
                         .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jButton_configurar)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(jButton_sair))
-                        .addComponent(jButton_login, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jPasswordField1, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jTextField_login, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)))
+                        .addComponent(jButton_entrar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel1)
+                                .addComponent(jLabel2))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jText_senha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
+                                .addComponent(jText_login, javax.swing.GroupLayout.Alignment.TRAILING)))))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -102,21 +124,28 @@ public class login extends javax.swing.JFrame {
                 .addGap(21, 21, 21)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1, 1, 1)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(11, 11, 11)
-                .addComponent(jTextField_login, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jText_login, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
                 .addGap(11, 11, 11)
-                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jText_senha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton_login, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButton_entrar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton_sair)
                     .addComponent(jButton_configurar))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
+
+        jText_login.getAccessibleContext().setAccessibleName("Digite seu cpf");
+        jText_login.getAccessibleContext().setAccessibleDescription("Digite seu cpf");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -127,7 +156,38 @@ public class login extends javax.swing.JFrame {
 
     private void jButton_sairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_sairActionPerformed
         // TODO add your handling code here:
+        System.exit(0);
     }//GEN-LAST:event_jButton_sairActionPerformed
+
+    private void jButton_entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_entrarActionPerformed
+        // TODO add your handling code here:
+        
+        try {
+            // TODO add your handling code here:
+            FuncionarioVO vo = new FuncionarioVO();
+            FuncionarioDAO dao = new FuncionarioDAO();
+
+            vo.setFuncionario_cpf(jText_login.getText());
+            dao.buscarLogin(vo);
+
+            if (jText_senha.getText()==vo.getFuncionario_senha()) {
+                dispose();
+                new Principal().setVisible(true);
+            } else if (vo.getFuncionario_senha()!="") {
+                JOptionPane.showMessageDialog(rootPane, "Favor cheque seu CPF");
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Verifique sua senha");
+            }      
+
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(rootPane, "erro1");
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(rootPane, "erro22222");
+        }
+        
+        
+    }//GEN-LAST:event_jButton_entrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -146,13 +206,13 @@ public class login extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         try {
@@ -164,7 +224,7 @@ public class login extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
 
-            new login().setVisible(true);
+            new Login().setVisible(true);
 
             }
         });
@@ -172,12 +232,14 @@ public class login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_configurar;
-    private javax.swing.JButton jButton_login;
+    private javax.swing.JButton jButton_entrar;
     private javax.swing.JButton jButton_sair;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JPasswordField jPasswordField1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabelTitulo;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTextField jTextField_login;
+    private javax.swing.JTextField jText_login;
+    private javax.swing.JPasswordField jText_senha;
     // End of variables declaration//GEN-END:variables
 }

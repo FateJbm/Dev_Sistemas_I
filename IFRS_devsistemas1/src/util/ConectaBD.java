@@ -8,7 +8,7 @@ import java.sql.*;
 import java.net.*;
 /**
  *
- * @author ricardo
+ * @author Juliano
  */
 public class ConectaBD {
     public static Connection getConnection() throws SQLException, ClassNotFoundException
@@ -16,17 +16,17 @@ public class ConectaBD {
         Connection con;
         Class.forName("com.mysql.jdbc.Driver");
 
-        String fonte = "jdbc:mysql://192.168.2.19"  /*endereço do banco*/
+        String fonte = "jdbc:mysql://127.0.0.1"  /*endereço do banco - conexao local*/
                  + ":" + "3306"       /*porta*/
-                 + "/" + "ifrs_dev_sistemas_1"        /*nome do banco*/
-                 + "?user=" + "fate"
-                 + "&password=" + "12345";
+                 + "/" + "devsistemas"        /*nome do banco*/
+                 + "?user=" + "root"    /*usuario*/
+                 + "&password=" + "FaTe160";    /*senha*/
         
-        String externa = "jdbc:mysql://200.132.7.1"  /*endereço do banco*/
+        String externa = "jdbc:mysql:fatefatee.ddns.net"  /*endereço do banco - conexao ddns*/
                  + ":" + "1080"       /*porta*/
-                 + "/" + "ads-db-03"        /*nome do banco*/
-                 + "?user=" + "ads-db-03"
-                 + "&password=" + "_aZ4y4";         
+                 + "/" + "devsistemas"        /*nome do banco*/
+                 + "?user=" + "root"
+                 + "&password=" + "FaTe160";         
         /*javax.swing.JOptionPane.showMessageDialog(null, fonte);*/
         return DriverManager.getConnection(fonte);
     }

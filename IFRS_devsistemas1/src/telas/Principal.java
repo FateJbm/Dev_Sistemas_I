@@ -5,6 +5,13 @@
  */
 package telas;
 
+import dao.AgendaDAO;
+import dao.ClienteDAO;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import vo.AgendaVO;
+import vo.ClienteVO;
+
 /**
  *
  * @author Fate
@@ -14,8 +21,20 @@ public class Principal extends javax.swing.JFrame {
     /**
      * Creates new form principal
      */
+    private ResultSetTableModel tableModel;
+    //private final String QUERY_DEFAULT = "select cod_emp , nome_emp, cod_dept,cod_cat,cod_emp_chefe from Empregado";
+    private final String QUERY_DEFAULT = "SELECT data, status, agendaid, cliente_idcliente, funcionario_idfuncionario, hora_inicio, hora_fim FROM agenda";
+
     public Principal() {
         initComponents();
+        try {
+            this.tableModel = new ResultSetTableModel(QUERY_DEFAULT);
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(rootPane, "SQL de montagem da tabela falhou!" + ex.getMessage());
+        } catch (ClassNotFoundException ex) {
+        }
+        this.jTable1.setModel(tableModel);
     }
 
     /**
@@ -65,10 +84,20 @@ public class Principal extends javax.swing.JFrame {
         jButtonCliente.setBackground(new java.awt.Color(255, 204, 204));
         jButtonCliente.setFont(new java.awt.Font("Tunga", 1, 18)); // NOI18N
         jButtonCliente.setText("CLIENTE");
+        jButtonCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonClienteActionPerformed(evt);
+            }
+        });
 
         jButtonServico.setBackground(new java.awt.Color(255, 204, 204));
         jButtonServico.setFont(new java.awt.Font("Tunga", 1, 18)); // NOI18N
         jButtonServico.setText("SERVIÇO");
+        jButtonServico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonServicoActionPerformed(evt);
+            }
+        });
 
         jButtonProduto.setBackground(new java.awt.Color(255, 204, 204));
         jButtonProduto.setFont(new java.awt.Font("Tunga", 1, 18)); // NOI18N
@@ -82,6 +111,11 @@ public class Principal extends javax.swing.JFrame {
         jButtonRecibo.setBackground(new java.awt.Color(255, 204, 204));
         jButtonRecibo.setFont(new java.awt.Font("Tunga", 1, 18)); // NOI18N
         jButtonRecibo.setText("RECIBO");
+        jButtonRecibo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonReciboActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -119,10 +153,25 @@ public class Principal extends javax.swing.JFrame {
         jTextFieldUsuarioLogado.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jButtonExcluir.setText("EXCLUIR");
+        jButtonExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonExcluirActionPerformed(evt);
+            }
+        });
 
         jButtonEditar.setText("EDITAR");
+        jButtonEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEditarActionPerformed(evt);
+            }
+        });
 
         jButtonIncluir.setText("INCLUIR");
+        jButtonIncluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonIncluirActionPerformed(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -221,30 +270,74 @@ public class Principal extends javax.swing.JFrame {
 
     private void jButtonProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProdutoActionPerformed
         // TODO add your handling code here:
+        CadastroProduto produto = new CadastroProduto();
+        produto.setVisible(true);
     }//GEN-LAST:event_jButtonProdutoActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        AgendaVO vo = new AgendaVO();
+        AgendaDAO dao = new AgendaDAO();
+
+        int row = jTable1.getSelectedRow(); //Use getSelectedRows se vc permite seleção múltipla
+        vo.setAgenda_id((int) jTable1.getValueAt(row, 0));
+
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jButtonServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonServicoActionPerformed
+        // TODO add your handling code here:
+        CadastroServico servico = new CadastroServico();
+        servico.setVisible(true);
+    }//GEN-LAST:event_jButtonServicoActionPerformed
+
+    private void jButtonReciboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReciboActionPerformed
+        // TODO add your handling code here:
+        CadastroRecibo recibo = new CadastroRecibo();
+        recibo.setVisible(true);
+    }//GEN-LAST:event_jButtonReciboActionPerformed
+
+    private void jButtonIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIncluirActionPerformed
+        // TODO add your handling code here:
+        CadastroAgenda agendar = new CadastroAgenda();
+        agendar.setVisible(true);
         try {
-            // TODO add your handling code here:
-            UsuarioVO vo = new UsuarioVO();
-            UsuarioDAO dao = new UsuarioDAO();
-
-            int row = jTable1.getSelectedRow(); //Use getSelectedRows se vc permite seleção múltipla
-            vo.setUsuario_id((int) jTable1.getValueAt(row, 0));
-            dao.buscarUsuario(vo);
-
-            jTextFieldUsuarioID.setText(String.valueOf(vo.getUsuario_id()));
-            jTextFieldUsuarioNome.setText(String.valueOf(vo.getUsuario_nome()));
-            jTextFieldUsuarioCPF.setText(String.valueOf(vo.getUsuario_cpf()));
-            jTextFieldDepartamentoID.setText(String.valueOf(vo.getDepartamento_id()));
-            jTextFieldCargoID.setText(String.valueOf(vo.getCargo_id()));
-
+            tableModel.setQuery(QUERY_DEFAULT);
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(rootPane, ex);
-        } catch (ClassNotFoundException ex) {
-            JOptionPane.showMessageDialog(rootPane, ex);
         }
-    }//GEN-LAST:event_jTable1MouseClicked
+    }//GEN-LAST:event_jButtonIncluirActionPerformed
+
+    private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
+        // TODO add your handling code here:
+        int row = jTable1.getSelectedRow();
+        CadastroAgenda agendar = new CadastroAgenda((int) jTable1.getValueAt(row, 0));
+        agendar.setVisible(true);
+    }//GEN-LAST:event_jButtonEditarActionPerformed
+
+    private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
+        // TODO add your handling code here:
+        AgendaVO vo = new AgendaVO();
+        AgendaDAO dao = new AgendaDAO();
+
+        int row = jTable1.getSelectedRow(); //Use getSelectedRows se vc permite seleção múltipla
+        vo.setAgenda_id((int) jTable1.getValueAt(row, 0));
+
+        int confirma = JOptionPane.showConfirmDialog(rootPane, "Confirma a exclusão?");
+        if (confirma == 0) {
+            try {
+                dao.excluir(vo);
+                tableModel.setQuery(QUERY_DEFAULT);
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(rootPane, ex);
+            }
+        }
+    }//GEN-LAST:event_jButtonExcluirActionPerformed
+
+    private void jButtonClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClienteActionPerformed
+        // TODO add your handling code here:
+        CadastroCliente cliente = new CadastroCliente();
+        cliente.setVisible(true);
+    }//GEN-LAST:event_jButtonClienteActionPerformed
 
     /**
      * @param args the command line arguments

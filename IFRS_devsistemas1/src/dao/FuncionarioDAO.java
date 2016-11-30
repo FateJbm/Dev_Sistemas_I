@@ -16,21 +16,21 @@ import vo.FuncionarioVO;
 public class FuncionarioDAO {
 
     private static final String SELECT
-            = "SELECT * FROM funcionario WHERE idcliente = ?";
+            = "SELECT * FROM funcionario WHERE idfuncionario = ?";
 
     private static final String SELECTLOGIN
             = "SELECT senha FROM funcionario WHERE cpf = ?";
     
     private static final String INSERT
-            = "INSERT INTO cliente (cpf, nome, rg, endereco, cidade, estado, email, fone)"
-            + "VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+            = "INSERT INTO funcionario (cpf, nome, rg, endereco, cidade, estado, email, fone, senha)"
+            + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     private static final String UPDATE
-            = "UPDATE cliente SET cpf = ?, nome = ?, rg = ?, endereco = ?, cidade = ?, estado = ?, email = ?, fone = ?"
-            + "WHERE idcliente = ?";
+            = "UPDATE funcionario SET cpf = ?, nome = ?, rg = ?, endereco = ?, cidade = ?, estado = ?, email = ?, fone = ?, senha = ?"
+            + "WHERE idfuncionario = ?";
 
     private static final String DELETE
-            = "DELETE from cliente WHERE idcliente = ?";
+            = "DELETE from funcionario WHERE idfuncionario = ?";
 
     public FuncionarioVO buscar(FuncionarioVO vo) throws SQLException, ClassNotFoundException {
         Connection connection = ConectaBD.getConnection();
@@ -78,14 +78,15 @@ public class FuncionarioDAO {
     public FuncionarioVO criar(FuncionarioVO vo) throws ClassNotFoundException, SQLException {
         Connection connection = ConectaBD.getConnection();
         try (PreparedStatement statement = connection.prepareStatement(INSERT)) {
-            statement.setString(1, vo.getCliente_cpf());
-            statement.setString(2, vo.getCliente_nome());
-            statement.setString(3, vo.getCliente_rg());
-            statement.setString(4, vo.getCliente_endereco());
-            statement.setString(5, vo.getCliente_cidade());
-            statement.setString(6, vo.getCliente_estado());
-            statement.setString(7, vo.getCliente_email());
-            statement.setInt(8, vo.getCliente_fone());
+            statement.setString(1, vo.getFuncionario_cpf());
+            statement.setString(2, vo.getFuncionario_nome());
+            statement.setString(3, vo.getFuncionario_rg());
+            statement.setString(4, vo.getFuncionario_endereco());
+            statement.setString(5, vo.getFuncionario_cidade());
+            statement.setString(6, vo.getFuncionario_estado());
+            statement.setString(7, vo.getFuncionario_email());
+            statement.setInt(8, vo.getFuncionario_fone());
+            statement.setString(9, vo.getFuncionario_senha());
             
             statement.executeUpdate();
         }
@@ -96,16 +97,17 @@ public class FuncionarioDAO {
         Connection connection = ConectaBD.getConnection();
         try (PreparedStatement statement = connection.prepareStatement(UPDATE)) {
             
-            statement.setString(1, vo.getCliente_cpf());
-            statement.setString(2, vo.getCliente_nome());
-            statement.setString(3, vo.getCliente_rg());
-            statement.setString(4, vo.getCliente_endereco());
-            statement.setString(5, vo.getCliente_cidade());
-            statement.setString(6, vo.getCliente_estado());
-            statement.setString(7, vo.getCliente_email());
-            statement.setInt(8, vo.getCliente_fone());
+            statement.setString(1, vo.getFuncionario_cpf());
+            statement.setString(2, vo.getFuncionario_nome());
+            statement.setString(3, vo.getFuncionario_rg());
+            statement.setString(4, vo.getFuncionario_endereco());
+            statement.setString(5, vo.getFuncionario_cidade());
+            statement.setString(6, vo.getFuncionario_estado());
+            statement.setString(7, vo.getFuncionario_email());
+            statement.setInt(8, vo.getFuncionario_fone());
+            statement.setString(9, vo.getFuncionario_senha());
             
-            statement.setInt(9, vo.getCliente_id());
+            statement.setInt(10, vo.getFuncionario_id());
             
             statement.executeUpdate();
         }

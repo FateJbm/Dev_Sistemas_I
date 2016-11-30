@@ -10,9 +10,10 @@ package vo;
  * @author Fate
  */
 public class ServicoVO {
-    
+
     private int servico_id;
     private String servico_nome;
+    private String servico_descricao;
     private int servico_tempo;
     private float servico_custo;
 
@@ -71,5 +72,19 @@ public class ServicoVO {
     public void setServico_custo(float servico_custo) {
         this.servico_custo = servico_custo;
     }
-    
+
+    /**
+     * @return the servico_descricao
+     */
+    public String getServico_descricao() {
+        return servico_descricao;
+    }
+
+    /**
+     * @param servico_descricao the servico_descricao to set
+     */
+    public void setServico_descricao(String servico_descricao) {
+        this.servico_descricao = servico_descricao;
+    }
+
 }

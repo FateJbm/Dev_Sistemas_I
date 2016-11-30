@@ -11,23 +11,25 @@ package vo;
  */
 public class AgendaVO {
     
-    private String agenda_cliente;
+    private int agenda_id;
+    private int agenda_cliente;
     private int agenda_funcionario;
     private String agenda_data;
     private String agenda_inicio;
     private String agenda_fim;
+    private String agenda_status;
 
     /**
      * @return the agenda_cliente
      */
-    public String getAgenda_cliente() {
+    public int getAgenda_cliente() {
         return agenda_cliente;
     }
 
     /**
      * @param agenda_cliente the agenda_cliente to set
      */
-    public void setAgenda_cliente(String agenda_cliente) {
+    public void setAgenda_cliente(int agenda_cliente) {
         this.agenda_cliente = agenda_cliente;
     }
 
@@ -85,6 +87,34 @@ public class AgendaVO {
      */
     public void setAgenda_fim(String agenda_fim) {
         this.agenda_fim = agenda_fim;
+    }
+
+    /**
+     * @return the agenda_id
+     */
+    public int getAgenda_id() {
+        return agenda_id;
+    }
+
+    /**
+     * @param agenda_id the agenda_id to set
+     */
+    public void setAgenda_id(int agenda_id) {
+        this.agenda_id = agenda_id;
+    }
+
+    /**
+     * @return the agenda_status
+     */
+    public String getAgenda_status() {
+        return agenda_status;
+    }
+
+    /**
+     * @param agenda_status the agenda_status to set
+     */
+    public void setAgenda_status(String agenda_status) {
+        this.agenda_status = agenda_status;
     }
     
 }

@@ -170,7 +170,7 @@ public class Login extends javax.swing.JFrame {
             vo.setFuncionario_cpf(jText_login.getText());
             dao.buscarLogin(vo);
 
-            if (jText_senha.getText()==vo.getFuncionario_senha()) {
+            if (jText_senha.getText()== vo.getFuncionario_senha()) {
                 dispose();
                 new Principal().setVisible(true);
             } else if (vo.getFuncionario_senha()!="") {

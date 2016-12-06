@@ -6,6 +6,7 @@
 package telas;
 
 import dao.FuncionarioDAO;
+import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -74,6 +75,14 @@ public class Login extends javax.swing.JFrame {
 
         jText_login.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jText_login.setToolTipText("Digite seu cpf");
+        jText_login.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jText_loginKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jText_loginKeyTyped(evt);
+            }
+        });
 
         jButton_sair.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jButton_sair.setText("Sair");
@@ -145,7 +154,6 @@ public class Login extends javax.swing.JFrame {
         );
 
         jText_login.getAccessibleContext().setAccessibleName("Digite seu cpf");
-        jText_login.getAccessibleContext().setAccessibleDescription("Digite seu cpf");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -162,6 +170,11 @@ public class Login extends javax.swing.JFrame {
     private void jButton_entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_entrarActionPerformed
         // TODO add your handling code here:
         
+        Principal principal = new Principal("Juliano Bernardi Teste");
+                principal.setVisible(true);
+                dispose();
+                
+        /*
         try {
             // TODO add your handling code here:
             FuncionarioVO vo = new FuncionarioVO();
@@ -170,24 +183,41 @@ public class Login extends javax.swing.JFrame {
             vo.setFuncionario_cpf(jText_login.getText());
             dao.buscarLogin(vo);
 
-            if (jText_senha.getText()== vo.getFuncionario_senha()) {
+            if (jText_senha.getText().equals(vo.getFuncionario_senha())) {
+                
+                Principal principal = new Principal(vo.getFuncionario_nome());
+                principal.setVisible(true);
                 dispose();
-                new Principal().setVisible(true);
-            } else if (vo.getFuncionario_senha()!="") {
-                JOptionPane.showMessageDialog(rootPane, "Favor cheque seu CPF");
-            } else {
+            } else if (!jText_senha.getText().equals(vo.getFuncionario_senha()) && !jText_senha.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(rootPane, "Verifique sua senha");
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Verifique CPF");
             }      
 
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(rootPane, "erro1");
+            JOptionPane.showMessageDialog(rootPane, "Sem conexão ou nenhum usuário não encontrado");
         } catch (ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(rootPane, "erro22222");
         }
-        
+        */
         
     }//GEN-LAST:event_jButton_entrarActionPerformed
+
+    private void jText_loginKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jText_loginKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jText_loginKeyPressed
+
+    private void jText_loginKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jText_loginKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if(!(Character.isDigit(c)) || c==KeyEvent.VK_BACK_SPACE || c==KeyEvent.VK_DELETE) {
+            evt.consume();
+        } else if(jText_login.getText().length() > 10) {
+            evt.consume();
+        }
+        
+    }//GEN-LAST:event_jText_loginKeyTyped
 
     /**
      * @param args the command line arguments

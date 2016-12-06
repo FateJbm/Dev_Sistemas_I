@@ -6,6 +6,9 @@
 package ifrs_devsistemas1;
 
 import telas.Login;
+import telas.CadastroAgenda;
+import vo.ClienteVO;
+import dao.ClienteDAO;
 
 /**
  *

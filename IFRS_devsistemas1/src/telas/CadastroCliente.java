@@ -6,6 +6,7 @@
 package telas;
 
 import dao.ClienteDAO;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import vo.ClienteVO;
 import java.sql.SQLException;
@@ -75,6 +76,12 @@ public class CadastroCliente extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(102, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel1.setText("CADASTRO CLIENTES");
+
+        jScrollPane1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jScrollPane1MouseClicked(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -146,6 +153,11 @@ public class CadastroCliente extends javax.swing.JFrame {
                 jTextFieldClienteCPFActionPerformed(evt);
             }
         });
+        jTextFieldClienteCPF.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldClienteCPFKeyTyped(evt);
+            }
+        });
 
         jLabel15.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -160,6 +172,11 @@ public class CadastroCliente extends javax.swing.JFrame {
                 jTextFieldClienteRGActionPerformed(evt);
             }
         });
+        jTextFieldClienteRG.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldClienteRGKeyTyped(evt);
+            }
+        });
 
         jLabel13.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         jLabel13.setText("Data Cadastro:");
@@ -168,6 +185,11 @@ public class CadastroCliente extends javax.swing.JFrame {
         jTextFieldClienteDataCadastro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldClienteDataCadastroActionPerformed(evt);
+            }
+        });
+        jTextFieldClienteDataCadastro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldClienteDataCadastroKeyTyped(evt);
             }
         });
 
@@ -188,6 +210,11 @@ public class CadastroCliente extends javax.swing.JFrame {
         jTextFieldClienteFone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldClienteFoneActionPerformed(evt);
+            }
+        });
+        jTextFieldClienteFone.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldClienteFoneKeyTyped(evt);
             }
         });
 
@@ -287,7 +314,6 @@ public class CadastroCliente extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(13, 13, 13)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
@@ -343,11 +369,13 @@ public class CadastroCliente extends javax.swing.JFrame {
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         try {
             // TODO add your handling code here:
+            System.out.println("aqui 1111");
             ClienteVO vo = new ClienteVO();
             ClienteDAO dao = new ClienteDAO();
-
+            System.out.println("aqui 2222");
             int row = jTable1.getSelectedRow(); //Use getSelectedRows se vc permite seleção múltipla
             vo.setCliente_id((int) jTable1.getValueAt(row, 0));
+            System.out.println(jTable1.getValueAt(row, 0) +" - "+ row);
             dao.buscar(vo);
 
             jTextFieldClienteID.setText(String.valueOf(vo.getCliente_id()));
@@ -397,9 +425,7 @@ public class CadastroCliente extends javax.swing.JFrame {
 
         ClienteDAO dao = new ClienteDAO();
 
-        if ((vo.getCliente_email().length() < 8) || !vo.getCliente_email().contains("@") || !vo.getCliente_email().contains(".")) {
-            JOptionPane.showInternalMessageDialog(rootPane, "Eggs are not supposed to be green.", "Inane warning", JOptionPane.WARNING_MESSAGE);
-        } else if (jTextFieldClienteID.getText().isEmpty()) {
+        if (jTextFieldClienteID.getText().isEmpty()) {
             try {
                 System.out.println("criando novo cliente");
                 dao.criar(vo);
@@ -487,6 +513,50 @@ public class CadastroCliente extends javax.swing.JFrame {
     private void jTextFieldClienteEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldClienteEstadoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldClienteEstadoActionPerformed
+
+    private void jTextFieldClienteCPFKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldClienteCPFKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if(!(Character.isDigit(c)) || c==KeyEvent.VK_BACK_SPACE || c==KeyEvent.VK_DELETE) {
+            evt.consume();
+        } else if(jTextFieldClienteCPF.getText().length() > 10) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextFieldClienteCPFKeyTyped
+
+    private void jTextFieldClienteRGKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldClienteRGKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if(!(Character.isDigit(c)) || c==KeyEvent.VK_BACK_SPACE || c==KeyEvent.VK_DELETE) {
+            evt.consume();
+        } else if(jTextFieldClienteRG.getText().length() > 9) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextFieldClienteRGKeyTyped
+
+    private void jTextFieldClienteDataCadastroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldClienteDataCadastroKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if(!(Character.isDigit(c)) || c==KeyEvent.VK_BACK_SPACE || c==KeyEvent.VK_DELETE) {
+            evt.consume();
+        } else if (jTextFieldClienteDataCadastro.getText().length() > 5) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextFieldClienteDataCadastroKeyTyped
+
+    private void jTextFieldClienteFoneKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldClienteFoneKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if(!(Character.isDigit(c)) || c==KeyEvent.VK_BACK_SPACE || c==KeyEvent.VK_DELETE) {
+            evt.consume();
+        } else if (jTextFieldClienteFone.getText().length() > 7) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextFieldClienteFoneKeyTyped
+
+    private void jScrollPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jScrollPane1MouseClicked
 
     /**
      * @param args the command line arguments

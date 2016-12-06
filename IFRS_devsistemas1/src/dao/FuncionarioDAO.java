@@ -19,7 +19,7 @@ public class FuncionarioDAO {
             = "SELECT * FROM funcionario WHERE idfuncionario = ?";
 
     private static final String SELECTLOGIN
-            = "SELECT senha FROM funcionario WHERE cpf = ?";
+            = "SELECT cpf, senha, nome FROM funcionario WHERE cpf = ?";
     
     private static final String INSERT
             = "INSERT INTO funcionario (cpf, nome, rg, endereco, cidade, estado, email, fone, senha)"
@@ -60,7 +60,7 @@ public class FuncionarioDAO {
     
     public FuncionarioVO buscarLogin(FuncionarioVO vo) throws SQLException, ClassNotFoundException {
         Connection connection = ConectaBD.getConnection();
-        
+        System.out.println("aberto");
         try (PreparedStatement statement = connection.prepareStatement(SELECTLOGIN)) {
         statement.setString(1, vo.getFuncionario_cpf());
         ResultSet resultSet = statement.executeQuery();
@@ -68,6 +68,7 @@ public class FuncionarioDAO {
      
         vo.setFuncionario_cpf(resultSet.getString("cpf"));
         vo.setFuncionario_senha(resultSet.getString("senha"));
+        vo.setFuncionario_nome(resultSet.getString("nome"));
 
         resultSet.close();
         statement.close();

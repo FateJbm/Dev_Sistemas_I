@@ -6,6 +6,7 @@
 package telas;
 
 import dao.FuncionarioDAO;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -146,6 +147,11 @@ public class CadastroFuncionario extends javax.swing.JFrame {
                 jTextField_CPFActionPerformed(evt);
             }
         });
+        jTextField_CPF.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField_CPFKeyTyped(evt);
+            }
+        });
 
         jLabel15.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -158,6 +164,11 @@ public class CadastroFuncionario extends javax.swing.JFrame {
         jTextField_RG.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField_RGActionPerformed(evt);
+            }
+        });
+        jTextField_RG.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField_RGKeyTyped(evt);
             }
         });
 
@@ -188,6 +199,11 @@ public class CadastroFuncionario extends javax.swing.JFrame {
         jTextField_Fone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField_FoneActionPerformed(evt);
+            }
+        });
+        jTextField_Fone.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField_FoneKeyTyped(evt);
             }
         });
 
@@ -489,6 +505,36 @@ public class CadastroFuncionario extends javax.swing.JFrame {
     private void jTextField_EstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_EstadoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField_EstadoActionPerformed
+
+    private void jTextField_CPFKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_CPFKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if(!(Character.isDigit(c)) || c==KeyEvent.VK_BACK_SPACE || c==KeyEvent.VK_DELETE) {
+            evt.consume();
+        } else if(jTextField_CPF.getText().length() > 10) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextField_CPFKeyTyped
+
+    private void jTextField_RGKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_RGKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if(!(Character.isDigit(c)) || c==KeyEvent.VK_BACK_SPACE || c==KeyEvent.VK_DELETE) {
+            evt.consume();
+        } else if(jTextField_RG.getText().length() > 9) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextField_RGKeyTyped
+
+    private void jTextField_FoneKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_FoneKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if(!(Character.isDigit(c)) || c==KeyEvent.VK_BACK_SPACE || c==KeyEvent.VK_DELETE) {
+            evt.consume();
+        } else if(jTextField_Fone.getText().length() > 9) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextField_FoneKeyTyped
 
     /**
      * @param args the command line arguments

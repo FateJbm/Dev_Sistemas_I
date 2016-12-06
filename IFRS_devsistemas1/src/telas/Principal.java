@@ -8,6 +8,8 @@ package telas;
 import dao.AgendaDAO;
 import dao.ClienteDAO;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import vo.AgendaVO;
 import vo.ClienteVO;
@@ -17,16 +19,18 @@ import vo.ClienteVO;
  * @author Fate
  */
 public class Principal extends javax.swing.JFrame {
-
+    private static String NOME;
     /**
      * Creates new form principal
      */
     private ResultSetTableModel tableModel;
     //private final String QUERY_DEFAULT = "select cod_emp , nome_emp, cod_dept,cod_cat,cod_emp_chefe from Empregado";
-    private final String QUERY_DEFAULT = "SELECT data, status, agendaid, cliente_idcliente, funcionario_idfuncionario, hora_inicio, hora_fim FROM agenda";
+    private final String QUERY_DEFAULT = "SELECT data, status, idagenda, cliente_idcliente, funcionario_idfuncionario, hora_inicio, hora_fim FROM agenda";
 
-    public Principal() {
+    public Principal(String nome) {
+        NOME = nome;
         initComponents();
+        jTextFieldUsuarioLogado.setText(NOME);
         try {
             this.tableModel = new ResultSetTableModel(QUERY_DEFAULT);
 
@@ -149,8 +153,13 @@ public class Principal extends javax.swing.JFrame {
         jLabel4.setText("AGENDAMENTOS");
 
         jTextFieldUsuarioLogado.setEditable(false);
-        jTextFieldUsuarioLogado.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        jTextFieldUsuarioLogado.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jTextFieldUsuarioLogado.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jTextFieldUsuarioLogado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldUsuarioLogadoActionPerformed(evt);
+            }
+        });
 
         jButtonExcluir.setText("EXCLUIR");
         jButtonExcluir.addActionListener(new java.awt.event.ActionListener() {
@@ -280,7 +289,7 @@ public class Principal extends javax.swing.JFrame {
         AgendaDAO dao = new AgendaDAO();
 
         int row = jTable1.getSelectedRow(); //Use getSelectedRows se vc permite seleção múltipla
-        vo.setAgenda_id((int) jTable1.getValueAt(row, 0));
+        vo.setAgenda_id((int) jTable1.getValueAt(row, 2));
 
     }//GEN-LAST:event_jTable1MouseClicked
 
@@ -310,7 +319,7 @@ public class Principal extends javax.swing.JFrame {
     private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
         // TODO add your handling code here:
         int row = jTable1.getSelectedRow();
-        CadastroAgenda agendar = new CadastroAgenda((int) jTable1.getValueAt(row, 0));
+        CadastroAgenda agendar = new CadastroAgenda((int) jTable1.getValueAt(row, 2));
         agendar.setVisible(true);
     }//GEN-LAST:event_jButtonEditarActionPerformed
 
@@ -320,7 +329,7 @@ public class Principal extends javax.swing.JFrame {
         AgendaDAO dao = new AgendaDAO();
 
         int row = jTable1.getSelectedRow(); //Use getSelectedRows se vc permite seleção múltipla
-        vo.setAgenda_id((int) jTable1.getValueAt(row, 0));
+        vo.setAgenda_id((int) jTable1.getValueAt(row, 2));
 
         int confirma = JOptionPane.showConfirmDialog(rootPane, "Confirma a exclusão?");
         if (confirma == 0) {
@@ -329,6 +338,8 @@ public class Principal extends javax.swing.JFrame {
                 tableModel.setQuery(QUERY_DEFAULT);
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(rootPane, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_jButtonExcluirActionPerformed
@@ -338,6 +349,10 @@ public class Principal extends javax.swing.JFrame {
         CadastroCliente cliente = new CadastroCliente();
         cliente.setVisible(true);
     }//GEN-LAST:event_jButtonClienteActionPerformed
+
+    private void jTextFieldUsuarioLogadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldUsuarioLogadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldUsuarioLogadoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -369,8 +384,9 @@ public class Principal extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            
             public void run() {
-                new Principal().setVisible(true);
+                new Principal(NOME).setVisible(true);
             }
         });
     }

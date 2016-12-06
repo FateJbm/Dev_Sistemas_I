@@ -6,6 +6,7 @@
 package telas;
 
 import dao.ProdutoDAO;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -17,7 +18,7 @@ public class CadastroProduto extends javax.swing.JFrame {
 
     private ResultSetTableModel tableModel;
     //private final String QUERY_DEFAULT = "select cod_emp , nome_emp, cod_dept,cod_cat,cod_emp_chefe from Empregado";
-    private final String QUERY_DEFAULT = "SELECT idproduto, nome, custo FROM funcionario";
+    private final String QUERY_DEFAULT = "SELECT idproduto, nome, preco FROM produto";
 
     public CadastroProduto() {
         initComponents();
@@ -148,6 +149,11 @@ public class CadastroProduto extends javax.swing.JFrame {
                 jTextField_custoActionPerformed(evt);
             }
         });
+        jTextField_custo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField_custoKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -177,7 +183,7 @@ public class CadastroProduto extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 257, Short.MAX_VALUE)
                         .addComponent(jButtonExcluir))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel16)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextField_custo, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -325,6 +331,14 @@ public class CadastroProduto extends javax.swing.JFrame {
     private void jTextField_custoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_custoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField_custoActionPerformed
+
+    private void jTextField_custoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_custoKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if(!(Character.isDigit(c)) || c==KeyEvent.VK_BACK_SPACE || c==KeyEvent.VK_DELETE) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextField_custoKeyTyped
 
     /**
      * @param args the command line arguments

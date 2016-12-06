@@ -6,6 +6,7 @@
 package telas;
 
 import dao.ReciboDAO;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -17,7 +18,7 @@ public class CadastroRecibo extends javax.swing.JFrame {
 
     private ResultSetTableModel tableModel;
     //private final String QUERY_DEFAULT = "select cod_emp , nome_emp, cod_dept,cod_cat,cod_emp_chefe from Empregado";
-    private final String QUERY_DEFAULT = "SELECT idcliente, nome, cpf, rg, endereco, cidade, estado, email, fone, senha FROM funcionario";
+    private final String QUERY_DEFAULT = "SELECT idrecibo, cliente_idcliente, data_emissao, hora_emissao, valorfinal, resumo FROM recibo";
 
     public CadastroRecibo() {
         initComponents();
@@ -47,25 +48,17 @@ public class CadastroRecibo extends javax.swing.JFrame {
         jButtonSalvar = new javax.swing.JButton();
         jButtonExcluir = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jTextField_Nome = new javax.swing.JTextField();
+        jTextField_Cliente = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jTextField_ID = new javax.swing.JTextField();
-        jTextField_CPF = new javax.swing.JTextField();
+        jTextField_Data = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jTextField_RG = new javax.swing.JTextField();
+        jTextField_Hora = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        jTextField_Senha = new javax.swing.JTextField();
+        jTextField_Valor = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
-        jTextField_Endereco = new javax.swing.JTextField();
-        jLabel16 = new javax.swing.JLabel();
-        jTextField_Fone = new javax.swing.JTextField();
-        jLabel17 = new javax.swing.JLabel();
-        jTextField_Email = new javax.swing.JTextField();
-        jLabel18 = new javax.swing.JLabel();
-        jTextField_Cidade = new javax.swing.JTextField();
-        jLabel20 = new javax.swing.JLabel();
-        jTextField_Estado = new javax.swing.JTextField();
+        jTextField_Resumo = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro Usuário");
@@ -74,7 +67,7 @@ public class CadastroRecibo extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Trebuchet MS", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(102, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel1.setText("CADASTRO FUNCIONARIO");
+        jLabel1.setText("CADASTRO RECIBO");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -119,17 +112,22 @@ public class CadastroRecibo extends javax.swing.JFrame {
         });
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        jLabel3.setText("Nome:");
+        jLabel3.setText("Cliente ID:");
 
-        jTextField_Nome.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jTextField_Nome.addActionListener(new java.awt.event.ActionListener() {
+        jTextField_Cliente.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jTextField_Cliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField_NomeActionPerformed(evt);
+                jTextField_ClienteActionPerformed(evt);
+            }
+        });
+        jTextField_Cliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField_ClienteKeyTyped(evt);
             }
         });
 
         jLabel11.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        jLabel11.setText("CPF:");
+        jLabel11.setText("Data Emissão:");
 
         jTextField_ID.setEditable(false);
         jTextField_ID.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
@@ -140,84 +138,59 @@ public class CadastroRecibo extends javax.swing.JFrame {
             }
         });
 
-        jTextField_CPF.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jTextField_CPF.addActionListener(new java.awt.event.ActionListener() {
+        jTextField_Data.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jTextField_Data.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField_CPFActionPerformed(evt);
+                jTextField_DataActionPerformed(evt);
+            }
+        });
+        jTextField_Data.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField_DataKeyTyped(evt);
             }
         });
 
         jLabel15.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel15.setText("ID:");
+        jLabel15.setText("NUM:");
 
         jLabel12.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        jLabel12.setText("RG:");
+        jLabel12.setText("Hora Emissão:");
 
-        jTextField_RG.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jTextField_RG.addActionListener(new java.awt.event.ActionListener() {
+        jTextField_Hora.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jTextField_Hora.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField_RGActionPerformed(evt);
+                jTextField_HoraActionPerformed(evt);
+            }
+        });
+        jTextField_Hora.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField_HoraKeyTyped(evt);
             }
         });
 
         jLabel13.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        jLabel13.setText("Senha:");
+        jLabel13.setText("Valor:");
 
-        jTextField_Senha.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jTextField_Senha.addActionListener(new java.awt.event.ActionListener() {
+        jTextField_Valor.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jTextField_Valor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField_SenhaActionPerformed(evt);
+                jTextField_ValorActionPerformed(evt);
+            }
+        });
+        jTextField_Valor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField_ValorKeyTyped(evt);
             }
         });
 
         jLabel14.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        jLabel14.setText("Endereço");
+        jLabel14.setText("Resumo:");
 
-        jTextField_Endereco.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jTextField_Endereco.addActionListener(new java.awt.event.ActionListener() {
+        jTextField_Resumo.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jTextField_Resumo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField_EnderecoActionPerformed(evt);
-            }
-        });
-
-        jLabel16.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        jLabel16.setText("Fone:");
-
-        jTextField_Fone.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jTextField_Fone.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField_FoneActionPerformed(evt);
-            }
-        });
-
-        jLabel17.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        jLabel17.setText("Email:");
-
-        jTextField_Email.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jTextField_Email.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField_EmailActionPerformed(evt);
-            }
-        });
-
-        jLabel18.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        jLabel18.setText("Cidade:");
-
-        jTextField_Cidade.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jTextField_Cidade.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField_CidadeActionPerformed(evt);
-            }
-        });
-
-        jLabel20.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        jLabel20.setText("Estado:");
-
-        jTextField_Estado.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jTextField_Estado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField_EstadoActionPerformed(evt);
+                jTextField_ResumoActionPerformed(evt);
             }
         });
 
@@ -228,58 +201,41 @@ public class CadastroRecibo extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel11)
-                            .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel11)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTextField_CPF, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, Short.MAX_VALUE)
-                                .addComponent(jLabel12)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField_RG, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel13)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField_Senha, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTextField_ID, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(32, 32, 32)
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField_Nome))))
+                        .addComponent(jTextField_Data, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(113, 113, 113)
+                        .addComponent(jLabel12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField_Hora, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField_Valor, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel14)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField_Endereco))
+                        .addComponent(jTextField_Resumo))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButtonNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 257, Short.MAX_VALUE)
                         .addComponent(jButtonExcluir))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel18)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField_Cidade, javax.swing.GroupLayout.PREFERRED_SIZE, 432, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
-                        .addComponent(jLabel20)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField_Estado, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(jLabel16)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField_Fone, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel17)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField_Email)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel15)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jTextField_ID, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(22, 22, 22)
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField_Cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -288,51 +244,36 @@ public class CadastroRecibo extends javax.swing.JFrame {
                 .addGap(13, 13, 13)
                 .addComponent(jLabel1)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(12, 12, 12)
-                            .addComponent(jLabel3))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField_Nome, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jTextField_Cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel15)
-                            .addComponent(jTextField_ID, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jTextField_ID, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel11)
-                        .addComponent(jTextField_CPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextField_Data, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel12)
-                        .addComponent(jTextField_RG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jTextField_Hora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField_Senha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextField_Valor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel13)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel14)
-                    .addComponent(jTextField_Endereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel18)
-                    .addComponent(jTextField_Cidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel16)
-                    .addComponent(jTextField_Fone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel20)
-                    .addComponent(jTextField_Estado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel17)
-                    .addComponent(jTextField_Email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField_Resumo, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonNovo)
                     .addComponent(jButtonSalvar)
                     .addComponent(jButtonExcluir))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -344,23 +285,19 @@ public class CadastroRecibo extends javax.swing.JFrame {
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         try {
             // TODO add your handling code here:
-            FuncionarioVO vo = new FuncionarioVO();
-            FuncionarioDAO dao = new FuncionarioDAO();
+            ReciboVO vo = new ReciboVO();
+            ReciboDAO dao = new ReciboDAO();
 
             int row = jTable1.getSelectedRow(); //Use getSelectedRows se vc permite seleção múltipla
-            vo.setFuncionario_id((int) jTable1.getValueAt(row, 0));
+            vo.setRecibo_id((int) jTable1.getValueAt(row, 0));
             dao.buscar(vo);
 
-            jTextField_ID.setText(String.valueOf(vo.getFuncionario_id()));
-            jTextField_CPF.setText(String.valueOf(vo.getFuncionario_cpf()));
-            jTextField_Nome.setText(String.valueOf(vo.getFuncionario_nome()));
-            jTextField_RG.setText(String.valueOf(vo.getFuncionario_rg()));
-            jTextField_Endereco.setText(String.valueOf(vo.getFuncionario_endereco()));
-            jTextField_Cidade.setText(String.valueOf(vo.getFuncionario_cidade()));
-            jTextField_Estado.setText(String.valueOf(vo.getFuncionario_estado()));
-            jTextField_Email.setText(String.valueOf(vo.getFuncionario_email()));
-            jTextField_Fone.setText(String.valueOf(vo.getFuncionario_fone()));
-            jTextField_Senha.setText(String.valueOf(vo.getFuncionario_senha()));
+            jTextField_ID.setText(String.valueOf(vo.getRecibo_id()));
+            jTextField_Data.setText(String.valueOf(vo.getRecibo_dataemissao()));
+            jTextField_Cliente.setText(String.valueOf(vo.getRecibo_cliente()));
+            jTextField_Hora.setText(String.valueOf(vo.getRecibo_horaemissao()));
+            jTextField_Resumo.setText(String.valueOf(vo.getRecibo_resumo()));
+            jTextField_Valor.setText(String.valueOf(vo.getRecibo_valorfinal()));
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(rootPane, ex);
@@ -372,36 +309,26 @@ public class CadastroRecibo extends javax.swing.JFrame {
     private void jButtonNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNovoActionPerformed
         // TODO add your handling code here:
         jTextField_ID.setText("");
-        jTextField_CPF.setText("");
-        jTextField_Nome.setText("");
-        jTextField_RG.setText("");
-        jTextField_Endereco.setText("");
-        jTextField_Cidade.setText("");
-        jTextField_Estado.setText("");
-        jTextField_Email.setText("");
-        jTextField_Fone.setText("");
-        jTextField_Senha.setText("");
+        jTextField_Data.setText("");
+        jTextField_Cliente.setText("");
+        jTextField_Hora.setText("");
+        jTextField_Resumo.setText("");
+        jTextField_Valor.setText("");
     }//GEN-LAST:event_jButtonNovoActionPerformed
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         // TODO add your handling code here:
-        FuncionarioVO vo = new FuncionarioVO();
+        ReciboVO vo = new ReciboVO();
 
-        vo.setFuncionario_cpf(jTextField_CPF.getText());
-        vo.setFuncionario_nome(jTextField_Nome.getText());
-        vo.setFuncionario_rg(jTextField_RG.getText());
-        vo.setFuncionario_endereco(jTextField_Endereco.getText());
-        vo.setFuncionario_cidade(jTextField_Cidade.getText());
-        vo.setFuncionario_estado(jTextField_Estado.getText());
-        vo.setFuncionario_email(jTextField_Email.getText());
-        vo.setFuncionario_fone(Integer.parseInt(jTextField_Fone.getText()));
-        vo.setFuncionario_senha(jTextField_Senha.getText());
+        vo.setRecibo_dataemissao(jTextField_Data.getText());
+        vo.setRecibo_cliente(Integer.parseInt(jTextField_Cliente.getText()));
+        vo.setRecibo_horaemissao(jTextField_Hora.getText());
+        vo.setRecibo_resumo(jTextField_Resumo.getText());
+        vo.setRecibo_valorfinal(Integer.parseInt(jTextField_Valor.getText()));
 
-        FuncionarioDAO dao = new FuncionarioDAO();
+        ReciboDAO dao = new ReciboDAO();
 
-        if ((vo.getFuncionario_email().length() < 8) || !vo.getFuncionario_email().contains("@") || !vo.getFuncionario_email().contains(".")) {
-            JOptionPane.showInternalMessageDialog(rootPane, "Eggs are not supposed to be green.", "Inane warning", JOptionPane.WARNING_MESSAGE);
-        } else if (jTextField_ID.getText().isEmpty()) {
+        if (jTextField_ID.getText().isEmpty()) {
             try {
                 System.out.println("criando novo cliente");
                 dao.criar(vo);
@@ -413,7 +340,7 @@ public class CadastroRecibo extends javax.swing.JFrame {
         } else {
             try {
                 System.out.println("alterando cliente");
-                vo.setFuncionario_id(Integer.parseInt(jTextField_ID.getText()));
+                vo.setRecibo_id(Integer.parseInt(jTextField_ID.getText()));
                 dao.alterar(vo);
                 tableModel.setQuery(QUERY_DEFAULT);
             } catch (Exception e) {
@@ -424,9 +351,9 @@ public class CadastroRecibo extends javax.swing.JFrame {
 
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
         // TODO add your handling code here:
-        FuncionarioVO vo = new FuncionarioVO();
-        FuncionarioDAO dao = new FuncionarioDAO();
-        vo.setFuncionario_id(Integer.parseInt(jTextField_ID.getText()));
+        ReciboVO vo = new ReciboVO();
+        ReciboDAO dao = new ReciboDAO();
+        vo.setRecibo_id(Integer.parseInt(jTextField_ID.getText()));
         int confirma = JOptionPane.showConfirmDialog(rootPane, "Confirma a exclusão?");
         if (confirma == 0) {
             try {
@@ -439,56 +366,76 @@ public class CadastroRecibo extends javax.swing.JFrame {
             }
         }
         jTextField_ID.setText("");
-        jTextField_CPF.setText("");
-        jTextField_Nome.setText("");
-        jTextField_RG.setText("");
-        jTextField_Endereco.setText("");
-        jTextField_Cidade.setText("");
-        jTextField_Estado.setText("");
-        jTextField_Email.setText("");
-        jTextField_Fone.setText("");
-        jTextField_Senha.setText("");
+        jTextField_Data.setText("");
+        jTextField_Cliente.setText("");
+        jTextField_Hora.setText("");
+        jTextField_Resumo.setText("");
+        jTextField_Valor.setText("");
     }//GEN-LAST:event_jButtonExcluirActionPerformed
 
-    private void jTextField_NomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_NomeActionPerformed
+    private void jTextField_ClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_ClienteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField_NomeActionPerformed
+    }//GEN-LAST:event_jTextField_ClienteActionPerformed
 
     private void jTextField_IDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_IDActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField_IDActionPerformed
 
-    private void jTextField_CPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_CPFActionPerformed
+    private void jTextField_DataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_DataActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField_CPFActionPerformed
+    }//GEN-LAST:event_jTextField_DataActionPerformed
 
-    private void jTextField_RGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_RGActionPerformed
+    private void jTextField_HoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_HoraActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField_RGActionPerformed
+    }//GEN-LAST:event_jTextField_HoraActionPerformed
 
-    private void jTextField_SenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_SenhaActionPerformed
+    private void jTextField_ValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_ValorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField_SenhaActionPerformed
+    }//GEN-LAST:event_jTextField_ValorActionPerformed
 
-    private void jTextField_EnderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_EnderecoActionPerformed
+    private void jTextField_ResumoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_ResumoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField_EnderecoActionPerformed
+    }//GEN-LAST:event_jTextField_ResumoActionPerformed
 
-    private void jTextField_FoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_FoneActionPerformed
+    private void jTextField_ClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_ClienteKeyTyped
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField_FoneActionPerformed
+        char c = evt.getKeyChar();
+        if(!(Character.isDigit(c)) || c==KeyEvent.VK_BACK_SPACE || c==KeyEvent.VK_DELETE) {
+            evt.consume();
+        } else if(jTextField_ID.getText().length() > 6) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextField_ClienteKeyTyped
 
-    private void jTextField_EmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_EmailActionPerformed
+    private void jTextField_DataKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_DataKeyTyped
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField_EmailActionPerformed
+        char c = evt.getKeyChar();
+        if(!(Character.isDigit(c)) || c==KeyEvent.VK_BACK_SPACE || c==KeyEvent.VK_DELETE) {
+            evt.consume();
+        } else if(jTextField_Data.getText().length() > 6) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextField_DataKeyTyped
 
-    private void jTextField_CidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_CidadeActionPerformed
+    private void jTextField_HoraKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_HoraKeyTyped
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField_CidadeActionPerformed
+        char c = evt.getKeyChar();
+        if(!(Character.isDigit(c)) || c==KeyEvent.VK_BACK_SPACE || c==KeyEvent.VK_DELETE) {
+            evt.consume();
+        } else if(jTextField_Hora.getText().length() > 5) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextField_HoraKeyTyped
 
-    private void jTextField_EstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_EstadoActionPerformed
+    private void jTextField_ValorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_ValorKeyTyped
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField_EstadoActionPerformed
+        char c = evt.getKeyChar();
+        if(!(Character.isDigit(c)) || c==KeyEvent.VK_BACK_SPACE || c==KeyEvent.VK_DELETE) {
+            evt.consume();
+        } else if(jTextField_Valor.getText().length() > 9) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextField_ValorKeyTyped
 
     /**
      * @param args the command line arguments
@@ -550,22 +497,14 @@ public class CadastroRecibo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField_CPF;
-    private javax.swing.JTextField jTextField_Cidade;
-    private javax.swing.JTextField jTextField_Email;
-    private javax.swing.JTextField jTextField_Endereco;
-    private javax.swing.JTextField jTextField_Estado;
-    private javax.swing.JTextField jTextField_Fone;
+    private javax.swing.JTextField jTextField_Cliente;
+    private javax.swing.JTextField jTextField_Data;
+    private javax.swing.JTextField jTextField_Hora;
     private javax.swing.JTextField jTextField_ID;
-    private javax.swing.JTextField jTextField_Nome;
-    private javax.swing.JTextField jTextField_RG;
-    private javax.swing.JTextField jTextField_Senha;
+    private javax.swing.JTextField jTextField_Resumo;
+    private javax.swing.JTextField jTextField_Valor;
     // End of variables declaration//GEN-END:variables
 }

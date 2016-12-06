@@ -16,38 +16,34 @@ import vo.ReciboVO;
 public class ReciboDAO {
 
     private static final String SELECT
-            = "SELECT * FROM cliente WHERE idcliente = ?";
+            = "SELECT * FROM recibo WHERE idrecibo = ?";
 
     private static final String INSERT
-            = "INSERT INTO cliente (cpf, nome, rg, endereco, cidade, estado, email, fone)"
-            + "VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+            = "INSERT INTO recibo (cliente_idcliente, data_emissao, hora_emissao, valorfinal, resumo)"
+            + "VALUES(?, ?, ?, ?, ?)";
 
     private static final String UPDATE
-            = "UPDATE cliente SET cpf = ?, nome = ?, rg = ?, endereco = ?, cidade = ?, estado = ?, email = ?, fone = ?"
+            = "UPDATE recibo SET cliente_idcliente = ?, data_emissao = ?, hora_emissao = ?, valorfinal = ?, resumo = ? "
             + "WHERE idcliente = ?";
 
     private static final String DELETE
-            = "DELETE from cliente WHERE idcliente = ?";
+            = "DELETE from recibo WHERE idrecibo = ?";
 
-    public ClienteVO buscar(ClienteVO vo) throws SQLException, ClassNotFoundException {
+    public ReciboVO buscar(ReciboVO vo) throws SQLException, ClassNotFoundException {
         Connection connection = ConectaBD.getConnection();
         
         try (PreparedStatement statement = connection.prepareStatement(SELECT)) {
-        statement.setInt(1, vo.getCliente_id());
+        statement.setInt(1, vo.getRecibo_id());
         ResultSet resultSet = statement.executeQuery();
         resultSet.next();
      
-        vo.setCliente_id(resultSet.getInt("idcliente"));
-        vo.setCliente_cpf(resultSet.getString("cpf"));
-        vo.setCliente_nome(resultSet.getString("nome"));
-        vo.setCliente_rg(resultSet.getString("rg"));
-        vo.setCliente_endereco(resultSet.getString("endereco"));
-        vo.setCliente_cidade(resultSet.getString("cidade"));
-        vo.setCliente_estado(resultSet.getString("estado"));
-        vo.setCliente_email(resultSet.getString("email"));
-        vo.setCliente_fone(resultSet.getInt("fone"));
-        vo.setCliente_dataCadastro(resultSet.getString("datacadastro"));
-
+        vo.setRecibo_id(resultSet.getInt("idrecibo"));
+        vo.setRecibo_cliente(resultSet.getInt("cliente_idcliente"));
+        vo.setRecibo_dataemissao(resultSet.getString("data_emissao"));
+        vo.setRecibo_horaemissao(resultSet.getString("hora_emissao"));
+        vo.setRecibo_valorfinal(resultSet.getFloat("valorfinal"));
+        vo.setRecibo_resumo(resultSet.getString("resumo"));
+       
         resultSet.close();
         statement.close();
         }
@@ -55,37 +51,31 @@ public class ReciboDAO {
         return vo;
     }
 
-    public ClienteVO criar(ClienteVO vo) throws ClassNotFoundException, SQLException {
+    public ReciboVO criar(ReciboVO vo) throws ClassNotFoundException, SQLException {
         Connection connection = ConectaBD.getConnection();
         try (PreparedStatement statement = connection.prepareStatement(INSERT)) {
-            statement.setString(1, vo.getCliente_cpf());
-            statement.setString(2, vo.getCliente_nome());
-            statement.setString(3, vo.getCliente_rg());
-            statement.setString(4, vo.getCliente_endereco());
-            statement.setString(5, vo.getCliente_cidade());
-            statement.setString(6, vo.getCliente_estado());
-            statement.setString(7, vo.getCliente_email());
-            statement.setInt(8, vo.getCliente_fone());
+            statement.setInt(1, vo.getRecibo_cliente());
+            statement.setString(2, vo.getRecibo_dataemissao());
+            statement.setString(3, vo.getRecibo_horaemissao());
+            statement.setFloat(4, vo.getRecibo_valorfinal());
+            statement.setString(5, vo.getRecibo_resumo());
             
             statement.executeUpdate();
         }
         return vo;
     }
 
-    public ClienteVO alterar(ClienteVO vo) throws ClassNotFoundException, SQLException {
+    public ReciboVO alterar(ReciboVO vo) throws ClassNotFoundException, SQLException {
         Connection connection = ConectaBD.getConnection();
         try (PreparedStatement statement = connection.prepareStatement(UPDATE)) {
             
-            statement.setString(1, vo.getCliente_cpf());
-            statement.setString(2, vo.getCliente_nome());
-            statement.setString(3, vo.getCliente_rg());
-            statement.setString(4, vo.getCliente_endereco());
-            statement.setString(5, vo.getCliente_cidade());
-            statement.setString(6, vo.getCliente_estado());
-            statement.setString(7, vo.getCliente_email());
-            statement.setInt(8, vo.getCliente_fone());
+            statement.setInt(1, vo.getRecibo_cliente());
+            statement.setString(2, vo.getRecibo_dataemissao());
+            statement.setString(3, vo.getRecibo_horaemissao());
+            statement.setFloat(4, vo.getRecibo_valorfinal());
+            statement.setString(5, vo.getRecibo_resumo());
             
-            statement.setInt(9, vo.getCliente_id());
+            statement.setInt(6, vo.getRecibo_id());
             
             statement.executeUpdate();
         }
@@ -93,10 +83,10 @@ public class ReciboDAO {
 
     }
 
-    public ClienteVO excluir(ClienteVO vo) throws ClassNotFoundException, SQLException {
+    public ReciboVO excluir(ReciboVO vo) throws ClassNotFoundException, SQLException {
         Connection connection = ConectaBD.getConnection();
         try (PreparedStatement statement = connection.prepareStatement(DELETE)) {
-            statement.setInt(1, vo.getCliente_id());
+            statement.setInt(1, vo.getRecibo_id());
             
             statement.executeUpdate();
         }

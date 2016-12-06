@@ -6,6 +6,7 @@
 package telas;
 
 import dao.ServicoDAO;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -17,7 +18,7 @@ public class CadastroServico extends javax.swing.JFrame {
 
     private ResultSetTableModel tableModel;
     //private final String QUERY_DEFAULT = "select cod_emp , nome_emp, cod_dept,cod_cat,cod_emp_chefe from Empregado";
-    private final String QUERY_DEFAULT = "SELECT idservico, nome, tempopadrao, custopadrao FROM funcionario";
+    private final String QUERY_DEFAULT = "SELECT idservico, nome, tempopadrao, custopadrao FROM servico";
 
     public CadastroServico() {
         initComponents();
@@ -150,14 +151,24 @@ public class CadastroServico extends javax.swing.JFrame {
                 jTextField_custoActionPerformed(evt);
             }
         });
+        jTextField_custo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField_custoKeyTyped(evt);
+            }
+        });
 
         jLabel17.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        jLabel17.setText("Tempo padrão:");
+        jLabel17.setText("Tempo padrão (min):");
 
         jTextField_tempo.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jTextField_tempo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField_tempoActionPerformed(evt);
+            }
+        });
+        jTextField_tempo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField_tempoKeyTyped(evt);
             }
         });
 
@@ -352,6 +363,26 @@ public class CadastroServico extends javax.swing.JFrame {
     private void jTextField_tempoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_tempoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField_tempoActionPerformed
+
+    private void jTextField_custoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_custoKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if(!(Character.isDigit(c)) || c==KeyEvent.VK_BACK_SPACE || c==KeyEvent.VK_DELETE) {
+            evt.consume();
+        } else if(jTextField_custo.getText().length() > 10) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextField_custoKeyTyped
+
+    private void jTextField_tempoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_tempoKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if(!(Character.isDigit(c)) || c==KeyEvent.VK_BACK_SPACE || c==KeyEvent.VK_DELETE) {
+            evt.consume();
+        } else if(jTextField_tempo.getText().length() > 4) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextField_tempoKeyTyped
 
     /**
      * @param args the command line arguments

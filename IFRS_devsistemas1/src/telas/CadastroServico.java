@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Juliano Bernardi - Todos os direitos reservados
  */
 package telas;
 
@@ -14,12 +12,20 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import vo.ServicoVO;
 
+/**
+ * Trabalho de Desenvolvimento de Sistemas 1
+ *
+ * @author Juliano Bernardi
+ */
 public class CadastroServico extends javax.swing.JFrame {
 
     private ResultSetTableModel tableModel;
-    //private final String QUERY_DEFAULT = "select cod_emp , nome_emp, cod_dept,cod_cat,cod_emp_chefe from Empregado";
     private final String QUERY_DEFAULT = "SELECT idservico, nome, tempopadrao, custopadrao FROM servico";
 
+    /**
+     * Formulario CadastroServico com agendamentos Seta o tableModel que da
+     * visibilidade aos itens armazenados no banco Inicia os componentes
+     */
     public CadastroServico() {
         initComponents();
         try {
@@ -257,6 +263,10 @@ public class CadastroServico extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Método que atualiza os dados dos campos conforme a ID selecionada na
+     * jTable Faz uso da biblioteca externa
+     */
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         try {
             // TODO add your handling code here:
@@ -280,6 +290,9 @@ public class CadastroServico extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTable1MouseClicked
 
+    /**
+     * Ação do Botão Novo Zera os campos setando-os como vazio
+     */
     private void jButtonNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNovoActionPerformed
         // TODO add your handling code here:
         jTextField_ID.setText("");
@@ -289,6 +302,9 @@ public class CadastroServico extends javax.swing.JFrame {
         jTextField_custo.setText("");
     }//GEN-LAST:event_jButtonNovoActionPerformed
 
+    /**
+     * Ação do Botão Salvar Cria um novo ou altera de acordo com o campo ID
+     */
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         // TODO add your handling code here:
         ServicoVO vo = new ServicoVO();
@@ -321,6 +337,10 @@ public class CadastroServico extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
+    /**
+     * Ação do Botão Excluir conforme serviço carregado Solicita confirmação de
+     * exclusão
+     */
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
         // TODO add your handling code here:
         ServicoVO vo = new ServicoVO();
@@ -364,27 +384,35 @@ public class CadastroServico extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField_tempoActionPerformed
 
+    /**
+     * Leitor de alterações no jTextField para limitação dados de entrada
+     */
     private void jTextField_custoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_custoKeyTyped
         // TODO add your handling code here:
         char c = evt.getKeyChar();
-        if(!(Character.isDigit(c)) || c==KeyEvent.VK_BACK_SPACE || c==KeyEvent.VK_DELETE) {
+        if (!(Character.isDigit(c)) || c == KeyEvent.VK_BACK_SPACE || c == KeyEvent.VK_DELETE) {
             evt.consume();
-        } else if(jTextField_custo.getText().length() > 10) {
+        } else if (jTextField_custo.getText().length() > 10) {
             evt.consume();
         }
     }//GEN-LAST:event_jTextField_custoKeyTyped
 
+    /**
+     * Leitor de alterações no jTextField para limitação dados de entrada
+     */
     private void jTextField_tempoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_tempoKeyTyped
         // TODO add your handling code here:
         char c = evt.getKeyChar();
-        if(!(Character.isDigit(c)) || c==KeyEvent.VK_BACK_SPACE || c==KeyEvent.VK_DELETE) {
+        if (!(Character.isDigit(c)) || c == KeyEvent.VK_BACK_SPACE || c == KeyEvent.VK_DELETE) {
             evt.consume();
-        } else if(jTextField_tempo.getText().length() > 4) {
+        } else if (jTextField_tempo.getText().length() > 4) {
             evt.consume();
         }
     }//GEN-LAST:event_jTextField_tempoKeyTyped
 
     /**
+     * Da visibilidade ao frame CadastroServico()
+     *
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -409,37 +437,6 @@ public class CadastroServico extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(CadastroServico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */

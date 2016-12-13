@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Juliano Bernardi - Todos os direitos reservados
  */
 package dao;
 
@@ -10,8 +8,9 @@ import util.ConectaBD;
 import vo.ProdutoVO;
 
 /**
+ * Trabalho de Desenvolvimento de Sistemas 1
  *
- * @author Fate
+ * @author Juliano Bernardi
  */
 public class ProdutoDAO {
 
@@ -29,6 +28,14 @@ public class ProdutoDAO {
     private static final String DELETE
             = "DELETE from produto WHERE idproduto = ?";
 
+    /**
+     * Método de busca geral
+     *
+     * @param vo - Objeto
+     * @return Objeto vo
+     * @throws SQLException - Exceção
+     * @throws ClassNotFoundException - Classe não encontrada
+     */
     public ProdutoVO buscar(ProdutoVO vo) throws SQLException, ClassNotFoundException {
         Connection connection = ConectaBD.getConnection();
 
@@ -49,6 +56,14 @@ public class ProdutoDAO {
         return vo;
     }
 
+    /**
+     * Método de criação / inclusão na tabela
+     *
+     * @param vo - Objeto
+     * @return Objeto vo
+     * @throws SQLException - Exceção
+     * @throws ClassNotFoundException - Classe não encontrada
+     */
     public ProdutoVO criar(ProdutoVO vo) throws ClassNotFoundException, SQLException {
         Connection connection = ConectaBD.getConnection();
         try (PreparedStatement statement = connection.prepareStatement(INSERT)) {
@@ -61,6 +76,14 @@ public class ProdutoDAO {
         return vo;
     }
 
+    /**
+     * Método de Alteração do registro
+     *
+     * @param vo - Objeto
+     * @return Objeto vo
+     * @throws SQLException - Exceção
+     * @throws ClassNotFoundException - Classe não encontrada
+     */
     public ProdutoVO alterar(ProdutoVO vo) throws ClassNotFoundException, SQLException {
         Connection connection = ConectaBD.getConnection();
         try (PreparedStatement statement = connection.prepareStatement(UPDATE)) {
@@ -77,6 +100,14 @@ public class ProdutoDAO {
 
     }
 
+    /**
+     * Método de exclusão com id
+     *
+     * @param vo - Objeto
+     * @return Objeto vo
+     * @throws SQLException - Exceção
+     * @throws ClassNotFoundException - Classe não encontrada
+     */
     public ProdutoVO excluir(ProdutoVO vo) throws ClassNotFoundException, SQLException {
         Connection connection = ConectaBD.getConnection();
         try (PreparedStatement statement = connection.prepareStatement(DELETE)) {

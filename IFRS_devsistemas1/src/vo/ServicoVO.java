@@ -1,16 +1,16 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Juliano Bernardi - Todos os direitos reservados
  */
 package vo;
 
 /**
- *
- * @author Fate
+ * Trabalho de Desenvolvimento de Sistemas 1
+ * @author Juliano Bernardi
  */
-public class ServicoVO {
 
+public class ServicoVO {
+    
+     
     private int servico_id;
     private String servico_nome;
     private String servico_descricao;

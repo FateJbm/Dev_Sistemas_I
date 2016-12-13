@@ -1,15 +1,19 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Juliano Bernardi - Todos os direitos reservados
  */
 package util;
 import java.sql.*;
 import java.net.*;
+
 /**
- *
- * @author Juliano
+ * Trabalho de Desenvolvimento de Sistemas 1
+ * @author Juliano Bernardi
  */
+
+/**
+* Realiza a conexão com o banco de dados MySQL
+
+*/
 public class ConectaBD {
     public static Connection getConnection() throws SQLException, ClassNotFoundException
     {
@@ -27,7 +31,7 @@ public class ConectaBD {
                  + "/" + "devsistemas"        /*nome do banco*/
                  + "?user=" + "root"
                  + "&password=" + "FaTe160";         
-        /*javax.swing.JOptionPane.showMessageDialog(null, fonte);*/
+// @return Connection - Com o fonte ou externa de acordo com o setado
         return DriverManager.getConnection(fonte);
     }
     

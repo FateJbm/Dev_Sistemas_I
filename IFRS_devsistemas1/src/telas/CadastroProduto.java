@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Juliano Bernardi - Todos os direitos reservados
  */
 package telas;
 
@@ -14,12 +12,20 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import vo.ProdutoVO;
 
+/**
+ * Trabalho de Desenvolvimento de Sistemas 1
+ *
+ * @author Juliano Bernardi
+ */
 public class CadastroProduto extends javax.swing.JFrame {
 
     private ResultSetTableModel tableModel;
-    //private final String QUERY_DEFAULT = "select cod_emp , nome_emp, cod_dept,cod_cat,cod_emp_chefe from Empregado";
     private final String QUERY_DEFAULT = "SELECT idproduto, nome, preco FROM produto";
 
+    /**
+     * Formulario CadastroProduto com agendamentos Seta o tableModel que da
+     * visibilidade aos itens armazenados no banco Inicia os componentes
+     */
     public CadastroProduto() {
         initComponents();
         try {
@@ -183,12 +189,13 @@ public class CadastroProduto extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 257, Short.MAX_VALUE)
                         .addComponent(jButtonExcluir))
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel16)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField_custo, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(27, 27, 27)
+                                .addComponent(jLabel16)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField_custo, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -233,6 +240,10 @@ public class CadastroProduto extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Método que atualiza os dados dos campos conforme a ID selecionada na
+     * jTable Faz uso da biblioteca externa
+     */
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         try {
             // TODO add your handling code here:
@@ -255,6 +266,9 @@ public class CadastroProduto extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTable1MouseClicked
 
+    /**
+     * Ação do Botão Novo Zera os campos setando-os como vazio
+     */
     private void jButtonNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNovoActionPerformed
         // TODO add your handling code here:
         jTextField_ID.setText("");
@@ -263,6 +277,9 @@ public class CadastroProduto extends javax.swing.JFrame {
         jTextField_custo.setText("");
     }//GEN-LAST:event_jButtonNovoActionPerformed
 
+    /**
+     * Ação do Botão Salvar Cria um novo ou altera de acordo com o campo ID
+     */
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         // TODO add your handling code here:
         ProdutoVO vo = new ProdutoVO();
@@ -294,6 +311,10 @@ public class CadastroProduto extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
+    /**
+     * Ação do Botão Excluir conforme Produto carregado Solicita confirmação de
+     * exclusão
+     */
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
         // TODO add your handling code here:
         ProdutoVO vo = new ProdutoVO();
@@ -332,15 +353,20 @@ public class CadastroProduto extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField_custoActionPerformed
 
+    /**
+     * Leitor de alterações no jTextField para limitação dados de entrada
+     */
     private void jTextField_custoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_custoKeyTyped
         // TODO add your handling code here:
         char c = evt.getKeyChar();
-        if(!(Character.isDigit(c)) || c==KeyEvent.VK_BACK_SPACE || c==KeyEvent.VK_DELETE) {
+        if (!(Character.isDigit(c)) || c == KeyEvent.VK_BACK_SPACE || c == KeyEvent.VK_DELETE) {
             evt.consume();
         }
     }//GEN-LAST:event_jTextField_custoKeyTyped
 
     /**
+     * Da visibilidade ao frame CadastroProduto()
+     *
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -365,21 +391,6 @@ public class CadastroProduto extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(CadastroProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */

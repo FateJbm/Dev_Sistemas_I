@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Juliano Bernardi - Todos os direitos reservados
  */
 package telas;
 
@@ -14,13 +12,14 @@ import javax.swing.UIManager;
 import vo.FuncionarioVO;
 
 /**
+ * Trabalho de Desenvolvimento de Sistemas 1
  *
- * @author Fate
+ * @author Juliano Bernardi
  */
 public class Login extends javax.swing.JFrame {
 
     /**
-     * Creates new form login
+     * Formulario Login Inicia os componentes
      */
     public Login() {
         initComponents();
@@ -38,13 +37,13 @@ public class Login extends javax.swing.JFrame {
         jButton_entrar = new javax.swing.JButton();
         jButton_configurar = new javax.swing.JButton();
         jLabelTitulo = new javax.swing.JLabel();
-        jText_login = new javax.swing.JTextField();
         jButton_sair = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         jText_senha = new javax.swing.JPasswordField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jText_login = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("BeautySalon - Login");
@@ -73,17 +72,6 @@ public class Login extends javax.swing.JFrame {
         jLabelTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelTitulo.setText("BeautySalon");
 
-        jText_login.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jText_login.setToolTipText("Digite seu cpf");
-        jText_login.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jText_loginKeyPressed(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jText_loginKeyTyped(evt);
-            }
-        });
-
         jButton_sair.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jButton_sair.setText("Sair");
         jButton_sair.addActionListener(new java.awt.event.ActionListener() {
@@ -98,6 +86,13 @@ public class Login extends javax.swing.JFrame {
         jLabel1.setText("CPF:");
 
         jLabel2.setText("SENHA:");
+
+        try {
+            jText_login.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        jText_login.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -123,8 +118,8 @@ public class Login extends javax.swing.JFrame {
                                 .addComponent(jLabel2))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jText_senha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
-                                .addComponent(jText_login, javax.swing.GroupLayout.Alignment.TRAILING)))))
+                                .addComponent(jText_senha, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
+                                .addComponent(jText_login)))))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -138,8 +133,8 @@ public class Login extends javax.swing.JFrame {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(11, 11, 11)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jText_login, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                    .addComponent(jLabel1)
+                    .addComponent(jText_login, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(11, 11, 11)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jText_senha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -153,8 +148,6 @@ public class Login extends javax.swing.JFrame {
                 .addContainerGap(13, Short.MAX_VALUE))
         );
 
-        jText_login.getAccessibleContext().setAccessibleName("Digite seu cpf");
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -162,18 +155,25 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton_configurarActionPerformed
 
+    /**
+     * Botão sair - finaliza o programa
+     */
     private void jButton_sairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_sairActionPerformed
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_jButton_sairActionPerformed
 
+    /**
+     * Ação do Botão Entrar Testa os dados e em caso de sucesso inicia o painel
+     * principal
+     */
     private void jButton_entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_entrarActionPerformed
         // TODO add your handling code here:
-        
+
         Principal principal = new Principal("Juliano Bernardi Teste");
-                principal.setVisible(true);
-                dispose();
-                
+        principal.setVisible(true);
+        dispose();
+
         /*
         try {
             // TODO add your handling code here:
@@ -196,30 +196,17 @@ public class Login extends javax.swing.JFrame {
 
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(rootPane, "Sem conexão ou nenhum usuário não encontrado");
+            JOptionPane.showMessageDialog(rootPane, "Sem conexão ou nenhum usuário encontrado");
         } catch (ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(rootPane, "erro22222");
         }
-        */
-        
+         */
+
     }//GEN-LAST:event_jButton_entrarActionPerformed
 
-    private void jText_loginKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jText_loginKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jText_loginKeyPressed
-
-    private void jText_loginKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jText_loginKeyTyped
-        // TODO add your handling code here:
-        char c = evt.getKeyChar();
-        if(!(Character.isDigit(c)) || c==KeyEvent.VK_BACK_SPACE || c==KeyEvent.VK_DELETE) {
-            evt.consume();
-        } else if(jText_login.getText().length() > 10) {
-            evt.consume();
-        }
-        
-    }//GEN-LAST:event_jText_loginKeyTyped
-
     /**
+     * Tenta o uso do LookAndFeel com nimbus Da visibilidade ao Frame Login()
+     *
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -254,7 +241,7 @@ public class Login extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
 
-            new Login().setVisible(true);
+                new Login().setVisible(true);
 
             }
         });
@@ -269,7 +256,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelTitulo;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTextField jText_login;
+    private javax.swing.JFormattedTextField jText_login;
     private javax.swing.JPasswordField jText_senha;
     // End of variables declaration//GEN-END:variables
 }

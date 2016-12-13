@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Juliano Bernardi - Todos os direitos reservados
  */
 package telas;
 
@@ -14,17 +12,30 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
+/**
+ * Trabalho de Desenvolvimento de Sistemas 1
+ *
+ * @author Juliano Bernardi
+ */
 public class CadastroAgenda extends javax.swing.JFrame {
-    
+
     private int id = 0;
 
+    /**
+     * Formulario CadastroAgenda com agendamentos Inicia os componentes
+     */
     public CadastroAgenda() {
         initComponents();
     }
 
+    /**
+     * Formulario CadastroAgenda com agendamentos Seta o tableModel que da
+     * visibilidade aos itens armazenados no banco Construtor com uso da id
+     * Inicia os componentes
+     */
     CadastroAgenda(int id) {
         initComponents();
-        
+
         AgendaVO vo = new AgendaVO();
         AgendaDAO dao = new AgendaDAO();
 
@@ -64,13 +75,13 @@ public class CadastroAgenda extends javax.swing.JFrame {
         jTextField_Funcionario = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        jTextField_inicio = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
-        jTextField_data = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
-        jTextField_fim = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
         jTextField_status = new javax.swing.JTextField();
+        jTextField_data = new javax.swing.JFormattedTextField();
+        jTextField_inicio = new javax.swing.JFormattedTextField();
+        jTextField_fim = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro Usuário");
@@ -135,47 +146,11 @@ public class CadastroAgenda extends javax.swing.JFrame {
         jLabel16.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         jLabel16.setText("Início:");
 
-        jTextField_inicio.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jTextField_inicio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField_inicioActionPerformed(evt);
-            }
-        });
-        jTextField_inicio.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextField_inicioKeyTyped(evt);
-            }
-        });
-
         jLabel17.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         jLabel17.setText("Data:");
 
-        jTextField_data.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jTextField_data.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField_dataActionPerformed(evt);
-            }
-        });
-        jTextField_data.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextField_dataKeyTyped(evt);
-            }
-        });
-
         jLabel18.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         jLabel18.setText("Fim:");
-
-        jTextField_fim.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jTextField_fim.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField_fimActionPerformed(evt);
-            }
-        });
-        jTextField_fim.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextField_fimKeyTyped(evt);
-            }
-        });
 
         jLabel19.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         jLabel19.setText("Status:");
@@ -186,6 +161,31 @@ public class CadastroAgenda extends javax.swing.JFrame {
                 jTextField_statusActionPerformed(evt);
             }
         });
+
+        try {
+            jTextField_data.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        jTextField_data.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField_data.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+
+        try {
+            jTextField_inicio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        jTextField_inicio.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField_inicio.setToolTipText("");
+        jTextField_inicio.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+
+        try {
+            jTextField_fim.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        jTextField_fim.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField_fim.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -217,17 +217,17 @@ public class CadastroAgenda extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel17)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField_data, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel16)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField_inicio, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel18)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField_fim, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jTextField_fim, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel17)
+                                    .addComponent(jLabel16))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextField_data, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField_inicio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel19)
@@ -258,8 +258,8 @@ public class CadastroAgenda extends javax.swing.JFrame {
                                     .addComponent(jTextField_Funcionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel11)))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGap(22, 22, 22)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel17)
                             .addComponent(jTextField_data, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -284,6 +284,9 @@ public class CadastroAgenda extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Ação do Botão Salvar Cria um novo ou altera de acordo com o campo ID
+     */
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         // TODO add your handling code here:
         AgendaVO vo = new AgendaVO();
@@ -304,6 +307,7 @@ public class CadastroAgenda extends javax.swing.JFrame {
             } catch (Exception e) {
                 System.out.println(e);
             }
+            dispose();
 
         } else {
             try {
@@ -313,6 +317,7 @@ public class CadastroAgenda extends javax.swing.JFrame {
             } catch (Exception e) {
                 System.out.println(e);
             }
+            dispose();
         }
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
@@ -328,73 +333,39 @@ public class CadastroAgenda extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField_FuncionarioActionPerformed
 
-    private void jTextField_inicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_inicioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField_inicioActionPerformed
-
-    private void jTextField_dataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_dataActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField_dataActionPerformed
-
-    private void jTextField_fimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_fimActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField_fimActionPerformed
-
     private void jTextField_statusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_statusActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField_statusActionPerformed
 
+    /**
+     * Leitor de alterações no jTextField para limitação dados de entrada
+     */
     private void jTextField_ClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_ClienteKeyTyped
         // TODO add your handling code here:
         char c = evt.getKeyChar();
-        if(!(Character.isDigit(c)) || c==KeyEvent.VK_BACK_SPACE || c==KeyEvent.VK_DELETE) {
+        if (!(Character.isDigit(c)) || c == KeyEvent.VK_BACK_SPACE || c == KeyEvent.VK_DELETE) {
             evt.consume();
         } else if (jTextField_Cliente.getText().length() > 6) {
             evt.consume();
         }
     }//GEN-LAST:event_jTextField_ClienteKeyTyped
 
+    /**
+     * Leitor de alterações no jTextField para limitação dados de entrada
+     */
     private void jTextField_FuncionarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_FuncionarioKeyTyped
         // TODO add your handling code here:
         char c = evt.getKeyChar();
-        if(!(Character.isDigit(c)) || c==KeyEvent.VK_BACK_SPACE || c==KeyEvent.VK_DELETE) {
+        if (!(Character.isDigit(c)) || c == KeyEvent.VK_BACK_SPACE || c == KeyEvent.VK_DELETE) {
             evt.consume();
-        } else if(jTextField_Funcionario.getText().length() > 6) {
+        } else if (jTextField_Funcionario.getText().length() > 6) {
             evt.consume();
         }
     }//GEN-LAST:event_jTextField_FuncionarioKeyTyped
 
-    private void jTextField_dataKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_dataKeyTyped
-        // TODO add your handling code here:
-        char c = evt.getKeyChar();
-        if(!(Character.isDigit(c)) || c==KeyEvent.VK_BACK_SPACE || c==KeyEvent.VK_DELETE) {
-            evt.consume();
-        } else if(jTextField_data.getText().length() > 8) {
-            evt.consume();
-        }
-    }//GEN-LAST:event_jTextField_dataKeyTyped
-
-    private void jTextField_inicioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_inicioKeyTyped
-        // TODO add your handling code here:
-        char c = evt.getKeyChar();
-        if(!(Character.isDigit(c)) || c==KeyEvent.VK_BACK_SPACE || c==KeyEvent.VK_DELETE) {
-            evt.consume();
-        } else if(jTextField_inicio.getText().length() > 6) {
-            evt.consume();
-        }
-    }//GEN-LAST:event_jTextField_inicioKeyTyped
-
-    private void jTextField_fimKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_fimKeyTyped
-        // TODO add your handling code here:
-        char c = evt.getKeyChar();
-        if(!(Character.isDigit(c)) || c==KeyEvent.VK_BACK_SPACE || c==KeyEvent.VK_DELETE) {
-            evt.consume();
-        } else if(jTextField_fim.getText().length() > 6) {
-            evt.consume();
-        }
-    }//GEN-LAST:event_jTextField_fimKeyTyped
-
     /**
+     * Da visibilidade ao Frame CadastroAgenda
+     *
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -420,7 +391,7 @@ public class CadastroAgenda extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(CadastroAgenda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -442,9 +413,9 @@ public class CadastroAgenda extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField_Cliente;
     private javax.swing.JTextField jTextField_Funcionario;
     private javax.swing.JTextField jTextField_ID;
-    private javax.swing.JTextField jTextField_data;
-    private javax.swing.JTextField jTextField_fim;
-    private javax.swing.JTextField jTextField_inicio;
+    private javax.swing.JFormattedTextField jTextField_data;
+    private javax.swing.JFormattedTextField jTextField_fim;
+    private javax.swing.JFormattedTextField jTextField_inicio;
     private javax.swing.JTextField jTextField_status;
     // End of variables declaration//GEN-END:variables
 }

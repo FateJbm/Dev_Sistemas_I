@@ -1,14 +1,13 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Juliano Bernardi - Todos os direitos reservados
  */
 package vo;
 
 /**
- *
- * @author Juliano
+ * Trabalho de Desenvolvimento de Sistemas 1
+ * @author Juliano Bernardi
  */
+
 public class ClienteVO {
 
     private int cliente_id;
@@ -19,7 +18,7 @@ public class ClienteVO {
     private String cliente_cidade;
     private String cliente_estado;
     private String cliente_email;
-    private int cliente_fone;
+    private String cliente_fone;
     private String cliente_dataCadastro;
             
     private boolean cliente_ativo;
@@ -139,14 +138,14 @@ public class ClienteVO {
     /**
      * @return the cliente_fone
      */
-    public int getCliente_fone() {
+    public String getCliente_fone() {
         return cliente_fone;
     }
 
     /**
      * @param cliente_fone the cliente_fone to set
      */
-    public void setCliente_fone(int cliente_fone) {
+    public void setCliente_fone(String cliente_fone) {
         this.cliente_fone = cliente_fone;
     }
 

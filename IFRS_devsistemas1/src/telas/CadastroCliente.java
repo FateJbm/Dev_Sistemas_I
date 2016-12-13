@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Juliano Bernardi - Todos os direitos reservados
  */
 package telas;
 
@@ -14,12 +12,20 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
+/**
+ * Trabalho de Desenvolvimento de Sistemas 1
+ *
+ * @author Juliano Bernardi
+ */
 public class CadastroCliente extends javax.swing.JFrame {
 
     private ResultSetTableModel tableModel;
-    //private final String QUERY_DEFAULT = "select cod_emp , nome_emp, cod_dept,cod_cat,cod_emp_chefe from Empregado";
     private final String QUERY_DEFAULT = "SELECT idcliente, nome, cpf, rg, endereco, cidade, estado, email, fone, datacadastro FROM cliente";
 
+    /**
+     * Formulario CadastroCliente com agendamentos Seta o tableModel que da
+     * visibilidade aos itens armazenados no banco Inicia os componentes
+     */
     public CadastroCliente() {
         initComponents();
         try {
@@ -51,7 +57,6 @@ public class CadastroCliente extends javax.swing.JFrame {
         jTextFieldClienteNome = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jTextFieldClienteID = new javax.swing.JTextField();
-        jTextFieldClienteCPF = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jTextFieldClienteRG = new javax.swing.JTextField();
@@ -60,13 +65,14 @@ public class CadastroCliente extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         jTextFieldClienteEndereco = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
-        jTextFieldClienteFone = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
         jTextFieldClienteEmail = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
         jTextFieldClienteCidade = new javax.swing.JTextField();
         jLabel20 = new javax.swing.JLabel();
         jTextFieldClienteEstado = new javax.swing.JTextField();
+        jTextFieldClienteCPF = new javax.swing.JFormattedTextField();
+        jTextFieldClienteFone = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro Usuário");
@@ -147,18 +153,6 @@ public class CadastroCliente extends javax.swing.JFrame {
             }
         });
 
-        jTextFieldClienteCPF.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jTextFieldClienteCPF.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldClienteCPFActionPerformed(evt);
-            }
-        });
-        jTextFieldClienteCPF.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextFieldClienteCPFKeyTyped(evt);
-            }
-        });
-
         jLabel15.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel15.setText("ID:");
@@ -206,18 +200,6 @@ public class CadastroCliente extends javax.swing.JFrame {
         jLabel16.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         jLabel16.setText("Fone:");
 
-        jTextFieldClienteFone.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jTextFieldClienteFone.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldClienteFoneActionPerformed(evt);
-            }
-        });
-        jTextFieldClienteFone.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextFieldClienteFoneKeyTyped(evt);
-            }
-        });
-
         jLabel17.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         jLabel17.setText("Email:");
 
@@ -248,6 +230,24 @@ public class CadastroCliente extends javax.swing.JFrame {
             }
         });
 
+        try {
+            jTextFieldClienteCPF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        jTextFieldClienteCPF.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextFieldClienteCPF.setToolTipText("");
+        jTextFieldClienteCPF.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+
+        try {
+            jTextFieldClienteFone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) #####-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        jTextFieldClienteFone.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextFieldClienteFone.setToolTipText("");
+        jTextFieldClienteFone.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -266,12 +266,12 @@ public class CadastroCliente extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTextFieldClienteCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, Short.MAX_VALUE)
+                                .addComponent(jTextFieldClienteCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel12)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTextFieldClienteRG, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(49, 49, 49)
                                 .addComponent(jLabel13)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTextFieldClienteDataCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -329,12 +329,12 @@ public class CadastroCliente extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel11)
-                        .addComponent(jTextFieldClienteCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel12)
-                        .addComponent(jTextFieldClienteRG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jTextFieldClienteCPF))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jTextFieldClienteDataCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel13)))
+                        .addComponent(jLabel13)
+                        .addComponent(jLabel12)
+                        .addComponent(jTextFieldClienteRG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
@@ -344,9 +344,9 @@ public class CadastroCliente extends javax.swing.JFrame {
                     .addComponent(jLabel18)
                     .addComponent(jTextFieldClienteCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel16)
-                    .addComponent(jTextFieldClienteFone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel20)
-                    .addComponent(jTextFieldClienteEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldClienteEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldClienteFone))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel17)
@@ -366,16 +366,17 @@ public class CadastroCliente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Método que atualiza os dados dos campos conforme a ID selecionada na
+     * jTable Faz uso da biblioteca externa
+     */
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         try {
             // TODO add your handling code here:
-            System.out.println("aqui 1111");
             ClienteVO vo = new ClienteVO();
             ClienteDAO dao = new ClienteDAO();
-            System.out.println("aqui 2222");
             int row = jTable1.getSelectedRow(); //Use getSelectedRows se vc permite seleção múltipla
             vo.setCliente_id((int) jTable1.getValueAt(row, 0));
-            System.out.println(jTable1.getValueAt(row, 0) +" - "+ row);
             dao.buscar(vo);
 
             jTextFieldClienteID.setText(String.valueOf(vo.getCliente_id()));
@@ -396,6 +397,9 @@ public class CadastroCliente extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTable1MouseClicked
 
+    /**
+     * Ação do Botão Novo Zera os campos setando-os como vazio
+     */
     private void jButtonNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNovoActionPerformed
         // TODO add your handling code here:
         jTextFieldClienteID.setText("");
@@ -410,6 +414,9 @@ public class CadastroCliente extends javax.swing.JFrame {
         jTextFieldClienteDataCadastro.setText("");
     }//GEN-LAST:event_jButtonNovoActionPerformed
 
+    /**
+     * Ação do Botão Salvar Cria um novo ou altera de acordo com o campo ID
+     */
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         // TODO add your handling code here:
         ClienteVO vo = new ClienteVO();
@@ -421,7 +428,7 @@ public class CadastroCliente extends javax.swing.JFrame {
         vo.setCliente_cidade(jTextFieldClienteCidade.getText());
         vo.setCliente_estado(jTextFieldClienteEstado.getText());
         vo.setCliente_email(jTextFieldClienteEmail.getText());
-        vo.setCliente_fone(Integer.parseInt(jTextFieldClienteFone.getText()));
+        vo.setCliente_fone(jTextFieldClienteFone.getText());
 
         ClienteDAO dao = new ClienteDAO();
 
@@ -446,6 +453,10 @@ public class CadastroCliente extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
+    /**
+     * Ação do Botão Excluir para o cliente carregado Solicita confirmação de
+     * exclusão
+     */
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
         // TODO add your handling code here:
         ClienteVO vo = new ClienteVO();
@@ -482,10 +493,6 @@ public class CadastroCliente extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldClienteIDActionPerformed
 
-    private void jTextFieldClienteCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldClienteCPFActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldClienteCPFActionPerformed
-
     private void jTextFieldClienteRGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldClienteRGActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldClienteRGActionPerformed
@@ -497,10 +504,6 @@ public class CadastroCliente extends javax.swing.JFrame {
     private void jTextFieldClienteEnderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldClienteEnderecoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldClienteEnderecoActionPerformed
-
-    private void jTextFieldClienteFoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldClienteFoneActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldClienteFoneActionPerformed
 
     private void jTextFieldClienteEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldClienteEmailActionPerformed
         // TODO add your handling code here:
@@ -514,51 +517,39 @@ public class CadastroCliente extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldClienteEstadoActionPerformed
 
-    private void jTextFieldClienteCPFKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldClienteCPFKeyTyped
-        // TODO add your handling code here:
-        char c = evt.getKeyChar();
-        if(!(Character.isDigit(c)) || c==KeyEvent.VK_BACK_SPACE || c==KeyEvent.VK_DELETE) {
-            evt.consume();
-        } else if(jTextFieldClienteCPF.getText().length() > 10) {
-            evt.consume();
-        }
-    }//GEN-LAST:event_jTextFieldClienteCPFKeyTyped
-
+    /**
+     * Leitor de alterações no jTextField para limitação dados de entrada
+     */
     private void jTextFieldClienteRGKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldClienteRGKeyTyped
         // TODO add your handling code here:
         char c = evt.getKeyChar();
-        if(!(Character.isDigit(c)) || c==KeyEvent.VK_BACK_SPACE || c==KeyEvent.VK_DELETE) {
+        if (!(Character.isDigit(c)) || c == KeyEvent.VK_BACK_SPACE || c == KeyEvent.VK_DELETE) {
             evt.consume();
-        } else if(jTextFieldClienteRG.getText().length() > 9) {
+        } else if (jTextFieldClienteRG.getText().length() > 9) {
             evt.consume();
         }
     }//GEN-LAST:event_jTextFieldClienteRGKeyTyped
 
+    /**
+     * Leitor de alterações no jTextField para limitação dados de entrada
+     */
     private void jTextFieldClienteDataCadastroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldClienteDataCadastroKeyTyped
         // TODO add your handling code here:
         char c = evt.getKeyChar();
-        if(!(Character.isDigit(c)) || c==KeyEvent.VK_BACK_SPACE || c==KeyEvent.VK_DELETE) {
+        if (!(Character.isDigit(c)) || c == KeyEvent.VK_BACK_SPACE || c == KeyEvent.VK_DELETE) {
             evt.consume();
         } else if (jTextFieldClienteDataCadastro.getText().length() > 5) {
             evt.consume();
         }
     }//GEN-LAST:event_jTextFieldClienteDataCadastroKeyTyped
 
-    private void jTextFieldClienteFoneKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldClienteFoneKeyTyped
-        // TODO add your handling code here:
-        char c = evt.getKeyChar();
-        if(!(Character.isDigit(c)) || c==KeyEvent.VK_BACK_SPACE || c==KeyEvent.VK_DELETE) {
-            evt.consume();
-        } else if (jTextFieldClienteFone.getText().length() > 7) {
-            evt.consume();
-        }
-    }//GEN-LAST:event_jTextFieldClienteFoneKeyTyped
-
     private void jScrollPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane1MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jScrollPane1MouseClicked
 
     /**
+     * Da visibilidade ao frame Cadastro Cliente
+     *
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -583,9 +574,6 @@ public class CadastroCliente extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(CadastroCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
@@ -613,13 +601,13 @@ public class CadastroCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextFieldClienteCPF;
+    private javax.swing.JFormattedTextField jTextFieldClienteCPF;
     private javax.swing.JTextField jTextFieldClienteCidade;
     private javax.swing.JTextField jTextFieldClienteDataCadastro;
     private javax.swing.JTextField jTextFieldClienteEmail;
     private javax.swing.JTextField jTextFieldClienteEndereco;
     private javax.swing.JTextField jTextFieldClienteEstado;
-    private javax.swing.JTextField jTextFieldClienteFone;
+    private javax.swing.JFormattedTextField jTextFieldClienteFone;
     private javax.swing.JTextField jTextFieldClienteID;
     private javax.swing.JTextField jTextFieldClienteNome;
     private javax.swing.JTextField jTextFieldClienteRG;

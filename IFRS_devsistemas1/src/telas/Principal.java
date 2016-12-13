@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Juliano Bernardi - Todos os direitos reservados
  */
 package telas;
 
@@ -15,18 +13,20 @@ import vo.AgendaVO;
 import vo.ClienteVO;
 
 /**
+ * Trabalho de Desenvolvimento de Sistemas 1
  *
- * @author Fate
+ * @author Juliano Bernardi
  */
 public class Principal extends javax.swing.JFrame {
+
     private static String NOME;
-    /**
-     * Creates new form principal
-     */
     private ResultSetTableModel tableModel;
-    //private final String QUERY_DEFAULT = "select cod_emp , nome_emp, cod_dept,cod_cat,cod_emp_chefe from Empregado";
     private final String QUERY_DEFAULT = "SELECT data, status, idagenda, cliente_idcliente, funcionario_idfuncionario, hora_inicio, hora_fim FROM agenda";
 
+    /**
+     * Formulario principal com agendamentos Seta o tableModel que da
+     * visibilidade aos itens armazenados no banco Inicia os componentes
+     */
     public Principal(String nome) {
         NOME = nome;
         initComponents();
@@ -65,6 +65,7 @@ public class Principal extends javax.swing.JFrame {
         jButtonIncluir = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jButtonBuscar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("---- BeautySalon V1.0 ----");
@@ -200,6 +201,13 @@ public class Principal extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
+        jButtonBuscar.setText("ATUALIZAR");
+        jButtonBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBuscarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -209,18 +217,18 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButtonExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jButtonEditar, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
-                            .addComponent(jButtonIncluir, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE)
-                        .addGap(324, 324, 324))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jButtonEditar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonExcluir, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonIncluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(265, 265, 265)
+                        .addComponent(jButtonBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 559, Short.MAX_VALUE)
                         .addComponent(jButton_sair)))
                 .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -243,20 +251,26 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(8, 8, 8)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 206, Short.MAX_VALUE)
-                        .addComponent(jButtonIncluir)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonEditar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonExcluir))
+                        .addGap(4, 4, 4)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 210, Short.MAX_VALUE)
+                                .addComponent(jButtonIncluir)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButtonEditar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButtonExcluir))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonBuscar)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
@@ -272,17 +286,27 @@ public class Principal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Ação do botão sair - finaliza o sistema
+     */
     private void jButton_sairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_sairActionPerformed
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_jButton_sairActionPerformed
 
+    /**
+     * Da visibilidade ao frame CadastroProduto() para CRUD específico
+     */
     private void jButtonProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProdutoActionPerformed
         // TODO add your handling code here:
         CadastroProduto produto = new CadastroProduto();
         produto.setVisible(true);
     }//GEN-LAST:event_jButtonProdutoActionPerformed
 
+    /**
+     * Método que atualiza os dados dos campos conforme a ID selecionada na
+     * jTable Faz uso da biblioteca externa
+     */
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
         AgendaVO vo = new AgendaVO();
@@ -293,18 +317,27 @@ public class Principal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jTable1MouseClicked
 
+    /**
+     * Da visibilidade ao frame CadastroServico() para CRUD específico
+     */
     private void jButtonServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonServicoActionPerformed
         // TODO add your handling code here:
         CadastroServico servico = new CadastroServico();
         servico.setVisible(true);
     }//GEN-LAST:event_jButtonServicoActionPerformed
 
+    /**
+     * Da visibilidade ao frame CadastroRecibo() para CRUD específico
+     */
     private void jButtonReciboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReciboActionPerformed
         // TODO add your handling code here:
         CadastroRecibo recibo = new CadastroRecibo();
         recibo.setVisible(true);
     }//GEN-LAST:event_jButtonReciboActionPerformed
 
+    /**
+     * Da visibilidade ao frame CadastroAgenda() para inclusão de nova entrada
+     */
     private void jButtonIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIncluirActionPerformed
         // TODO add your handling code here:
         CadastroAgenda agendar = new CadastroAgenda();
@@ -316,6 +349,9 @@ public class Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonIncluirActionPerformed
 
+    /**
+     * Da visibilidade ao frame CadastroAgenda() para alteração de agendamento
+     */
     private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
         // TODO add your handling code here:
         int row = jTable1.getSelectedRow();
@@ -323,12 +359,19 @@ public class Principal extends javax.swing.JFrame {
         agendar.setVisible(true);
     }//GEN-LAST:event_jButtonEditarActionPerformed
 
+    /**
+     * Ação do Botão Excluir para o agendamento selecionado na tabela Solicita
+     * confirmação de exclusão
+     */
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
         // TODO add your handling code here:
         AgendaVO vo = new AgendaVO();
         AgendaDAO dao = new AgendaDAO();
 
         int row = jTable1.getSelectedRow(); //Use getSelectedRows se vc permite seleção múltipla
+
+        vo.setAgenda_cliente(HIDE_ON_CLOSE);
+
         vo.setAgenda_id((int) jTable1.getValueAt(row, 2));
 
         int confirma = JOptionPane.showConfirmDialog(rootPane, "Confirma a exclusão?");
@@ -344,6 +387,9 @@ public class Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonExcluirActionPerformed
 
+    /**
+     * Da visibilidade ao frame CadastroCliente() para CRUD específico
+     */
     private void jButtonClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClienteActionPerformed
         // TODO add your handling code here:
         CadastroCliente cliente = new CadastroCliente();
@@ -355,6 +401,20 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldUsuarioLogadoActionPerformed
 
     /**
+     * Atualiza a tabela para mostrar alterações e novos resultados.
+     */
+    private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
+        // TODO add your handling code here:
+        try {
+            tableModel.setQuery(QUERY_DEFAULT);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(rootPane, ex);
+        }
+    }//GEN-LAST:event_jButtonBuscarActionPerformed
+
+    /**
+     * Da visibilidade ao frame Principal()
+     *
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -384,7 +444,7 @@ public class Principal extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            
+
             public void run() {
                 new Principal(NOME).setVisible(true);
             }
@@ -392,6 +452,7 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonBuscar;
     private javax.swing.JButton jButtonCliente;
     private javax.swing.JButton jButtonEditar;
     private javax.swing.JButton jButtonExcluir;

@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Juliano Bernardi - Todos os direitos reservados
  */
 package telas;
 
@@ -14,12 +12,20 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import vo.ReciboVO;
 
+/**
+ * Trabalho de Desenvolvimento de Sistemas 1
+ *
+ * @author Juliano Bernardi
+ */
 public class CadastroRecibo extends javax.swing.JFrame {
 
     private ResultSetTableModel tableModel;
-    //private final String QUERY_DEFAULT = "select cod_emp , nome_emp, cod_dept,cod_cat,cod_emp_chefe from Empregado";
     private final String QUERY_DEFAULT = "SELECT idrecibo, cliente_idcliente, data_emissao, hora_emissao, valorfinal, resumo FROM recibo";
 
+    /**
+     * Formulario CadastroRecibo com agendamentos Seta o tableModel que da
+     * visibilidade aos itens armazenados no banco Inicia os componentes
+     */
     public CadastroRecibo() {
         initComponents();
         try {
@@ -51,14 +57,14 @@ public class CadastroRecibo extends javax.swing.JFrame {
         jTextField_Cliente = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jTextField_ID = new javax.swing.JTextField();
-        jTextField_Data = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jTextField_Hora = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         jTextField_Valor = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         jTextField_Resumo = new javax.swing.JTextField();
+        jTextField_Data = new javax.swing.JFormattedTextField();
+        jTextField_Hora = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro Usuário");
@@ -138,36 +144,12 @@ public class CadastroRecibo extends javax.swing.JFrame {
             }
         });
 
-        jTextField_Data.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jTextField_Data.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField_DataActionPerformed(evt);
-            }
-        });
-        jTextField_Data.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextField_DataKeyTyped(evt);
-            }
-        });
-
         jLabel15.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel15.setText("NUM:");
 
         jLabel12.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         jLabel12.setText("Hora Emissão:");
-
-        jTextField_Hora.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jTextField_Hora.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField_HoraActionPerformed(evt);
-            }
-        });
-        jTextField_Hora.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextField_HoraKeyTyped(evt);
-            }
-        });
 
         jLabel13.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         jLabel13.setText("Valor:");
@@ -194,6 +176,23 @@ public class CadastroRecibo extends javax.swing.JFrame {
             }
         });
 
+        try {
+            jTextField_Data.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        jTextField_Data.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField_Data.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+
+        try {
+            jTextField_Hora.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        jTextField_Hora.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField_Hora.setToolTipText("");
+        jTextField_Hora.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -204,12 +203,12 @@ public class CadastroRecibo extends javax.swing.JFrame {
                     .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel11)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField_Data, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(113, 113, 113)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField_Data, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(215, 215, 215)
                         .addComponent(jLabel12)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField_Hora, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextField_Hora, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel13)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -257,8 +256,8 @@ public class CadastroRecibo extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel11)
-                        .addComponent(jTextField_Data, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel12)
+                        .addComponent(jTextField_Data, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jTextField_Hora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jTextField_Valor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -282,6 +281,10 @@ public class CadastroRecibo extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Método que atualiza os dados dos campos conforme a ID selecionada na
+     * jTable Faz uso da biblioteca externa
+     */
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         try {
             // TODO add your handling code here:
@@ -306,6 +309,9 @@ public class CadastroRecibo extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTable1MouseClicked
 
+    /**
+     * Ação do Botão Novo Zera os campos setando-os como vazio
+     */
     private void jButtonNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNovoActionPerformed
         // TODO add your handling code here:
         jTextField_ID.setText("");
@@ -316,6 +322,9 @@ public class CadastroRecibo extends javax.swing.JFrame {
         jTextField_Valor.setText("");
     }//GEN-LAST:event_jButtonNovoActionPerformed
 
+    /**
+     * Ação do Botão Salvar Cria um novo ou altera de acordo com o campo ID
+     */
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         // TODO add your handling code here:
         ReciboVO vo = new ReciboVO();
@@ -349,6 +358,10 @@ public class CadastroRecibo extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
+    /**
+     * Ação do Botão Excluir conforme recibo carregado Solicita confirmação de
+     * exclusão
+     */
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
         // TODO add your handling code here:
         ReciboVO vo = new ReciboVO();
@@ -381,14 +394,6 @@ public class CadastroRecibo extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField_IDActionPerformed
 
-    private void jTextField_DataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_DataActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField_DataActionPerformed
-
-    private void jTextField_HoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_HoraActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField_HoraActionPerformed
-
     private void jTextField_ValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_ValorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField_ValorActionPerformed
@@ -397,47 +402,35 @@ public class CadastroRecibo extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField_ResumoActionPerformed
 
+    /**
+     * Leitor de alterações no jTextField para limitação dados de entrada
+     */
     private void jTextField_ClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_ClienteKeyTyped
         // TODO add your handling code here:
         char c = evt.getKeyChar();
-        if(!(Character.isDigit(c)) || c==KeyEvent.VK_BACK_SPACE || c==KeyEvent.VK_DELETE) {
+        if (!(Character.isDigit(c)) || c == KeyEvent.VK_BACK_SPACE || c == KeyEvent.VK_DELETE) {
             evt.consume();
-        } else if(jTextField_ID.getText().length() > 6) {
+        } else if (jTextField_ID.getText().length() > 6) {
             evt.consume();
         }
     }//GEN-LAST:event_jTextField_ClienteKeyTyped
 
-    private void jTextField_DataKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_DataKeyTyped
-        // TODO add your handling code here:
-        char c = evt.getKeyChar();
-        if(!(Character.isDigit(c)) || c==KeyEvent.VK_BACK_SPACE || c==KeyEvent.VK_DELETE) {
-            evt.consume();
-        } else if(jTextField_Data.getText().length() > 6) {
-            evt.consume();
-        }
-    }//GEN-LAST:event_jTextField_DataKeyTyped
-
-    private void jTextField_HoraKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_HoraKeyTyped
-        // TODO add your handling code here:
-        char c = evt.getKeyChar();
-        if(!(Character.isDigit(c)) || c==KeyEvent.VK_BACK_SPACE || c==KeyEvent.VK_DELETE) {
-            evt.consume();
-        } else if(jTextField_Hora.getText().length() > 5) {
-            evt.consume();
-        }
-    }//GEN-LAST:event_jTextField_HoraKeyTyped
-
+    /**
+     * Leitor de alterações no jTextField para limitação dados de entrada
+     */
     private void jTextField_ValorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_ValorKeyTyped
         // TODO add your handling code here:
         char c = evt.getKeyChar();
-        if(!(Character.isDigit(c)) || c==KeyEvent.VK_BACK_SPACE || c==KeyEvent.VK_DELETE) {
+        if (!(Character.isDigit(c)) || c == KeyEvent.VK_BACK_SPACE || c == KeyEvent.VK_DELETE) {
             evt.consume();
-        } else if(jTextField_Valor.getText().length() > 9) {
+        } else if (jTextField_Valor.getText().length() > 9) {
             evt.consume();
         }
     }//GEN-LAST:event_jTextField_ValorKeyTyped
 
     /**
+     * Da visibilidade ao frame CadastroRecibo()
+     *
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -463,21 +456,6 @@ public class CadastroRecibo extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(CadastroRecibo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -501,8 +479,8 @@ public class CadastroRecibo extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField_Cliente;
-    private javax.swing.JTextField jTextField_Data;
-    private javax.swing.JTextField jTextField_Hora;
+    private javax.swing.JFormattedTextField jTextField_Data;
+    private javax.swing.JFormattedTextField jTextField_Hora;
     private javax.swing.JTextField jTextField_ID;
     private javax.swing.JTextField jTextField_Resumo;
     private javax.swing.JTextField jTextField_Valor;

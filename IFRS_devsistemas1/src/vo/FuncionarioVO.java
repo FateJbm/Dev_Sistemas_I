@@ -1,14 +1,13 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Juliano Bernardi - Todos os direitos reservados
  */
 package vo;
 
 /**
- *
- * @author Fate
+ * Trabalho de Desenvolvimento de Sistemas 1
+ * @author Juliano Bernardi
  */
+
 public class FuncionarioVO {
     
     private int funcionario_id;
@@ -19,7 +18,7 @@ public class FuncionarioVO {
     private String funcionario_cidade;
     private String funcionario_estado;
     private String funcionario_email;
-    private int funcionario_fone;
+    private String funcionario_fone;
     private String funcionario_senha;
 
     /**
@@ -137,14 +136,14 @@ public class FuncionarioVO {
     /**
      * @return the funcionario_fone
      */
-    public int getFuncionario_fone() {
+    public String getFuncionario_fone() {
         return funcionario_fone;
     }
 
     /**
      * @param funcionario_fone the funcionario_fone to set
      */
-    public void setFuncionario_fone(int funcionario_fone) {
+    public void setFuncionario_fone(String funcionario_fone) {
         this.funcionario_fone = funcionario_fone;
     }
 

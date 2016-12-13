@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Juliano Bernardi - Todos os direitos reservados
  */
 package ifrs_devsistemas1;
 
@@ -11,13 +9,15 @@ import vo.ClienteVO;
 import dao.ClienteDAO;
 
 /**
+ * Trabalho de Desenvolvimento de Sistemas 1
  *
- * @author Fate
+ * @author Juliano Bernardi
  */
 public class IFRS_devsistemas1 {
 
     /**
-     * @param args the command line arguments
+     * Método main - Inicia o frame Login()
+     * @param args não utilizados/implementados
      */
     public static void main(String[] args) {
         // TODO code application logic here

@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Juliano Bernardi - Todos os direitos reservados
  */
 package dao;
 
@@ -10,8 +8,9 @@ import util.ConectaBD;
 import vo.ServicoVO;
 
 /**
+ * Trabalho de Desenvolvimento de Sistemas 1
  *
- * @author Fate
+ * @author Juliano Bernardi
  */
 public class ServicoDAO {
 
@@ -29,6 +28,14 @@ public class ServicoDAO {
     private static final String DELETE
             = "DELETE from servico WHERE idservico = ?";
 
+    /**
+     * Método de busca geral
+     *
+     * @param vo - Objeto
+     * @return Objeto vo
+     * @throws SQLException - Exceção
+     * @throws ClassNotFoundException - Classe não encontrada
+     */
     public ServicoVO buscar(ServicoVO vo) throws SQLException, ClassNotFoundException {
         Connection connection = ConectaBD.getConnection();
 
@@ -50,6 +57,14 @@ public class ServicoDAO {
         return vo;
     }
 
+    /**
+     * Método de criação / inclusão na tabela
+     *
+     * @param vo - Objeto
+     * @return Objeto vo
+     * @throws SQLException - Exceção
+     * @throws ClassNotFoundException - Classe não encontrada
+     */
     public ServicoVO criar(ServicoVO vo) throws ClassNotFoundException, SQLException {
         Connection connection = ConectaBD.getConnection();
         try (PreparedStatement statement = connection.prepareStatement(INSERT)) {
@@ -63,6 +78,14 @@ public class ServicoDAO {
         return vo;
     }
 
+    /**
+     * Método de Alteração do registro
+     *
+     * @param vo - Objeto
+     * @return Objeto vo
+     * @throws SQLException - Exceção
+     * @throws ClassNotFoundException - Classe não encontrada
+     */
     public ServicoVO alterar(ServicoVO vo) throws ClassNotFoundException, SQLException {
         Connection connection = ConectaBD.getConnection();
         try (PreparedStatement statement = connection.prepareStatement(UPDATE)) {
@@ -80,6 +103,14 @@ public class ServicoDAO {
 
     }
 
+    /**
+     * Método de exclusão com id
+     *
+     * @param vo - Objeto
+     * @return Objeto vo
+     * @throws SQLException - Exceção
+     * @throws ClassNotFoundException - Classe não encontrada
+     */
     public ServicoVO excluir(ServicoVO vo) throws ClassNotFoundException, SQLException {
         Connection connection = ConectaBD.getConnection();
         try (PreparedStatement statement = connection.prepareStatement(DELETE)) {
